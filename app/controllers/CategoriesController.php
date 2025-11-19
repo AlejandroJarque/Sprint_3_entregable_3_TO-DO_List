@@ -55,6 +55,26 @@ class CategoriesController extends ApplicationController {
 
     public function updateAction() {
 
+        $id = $this->_getParam('id');
+
+        if($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            throw new Exception("Metodo no permitido");
+            
+        }
+
+        $name = trim($_POST['categori_name'] ?? '');
+        $description = trim($_POST['categori_description'] ?? '');
+
+        if($name === '') {
+            header("Location: ". WEB_ROOT . "/categories/edit/$id");
+            exit;
+        }
+
+        $model = new Category();
+        $model ->updateCategory($id, $name, $description);
+
+        header("Location: ". WEB_ROOT . "/categories");
+        exit;
     }
 
     public function deleteAction() {
