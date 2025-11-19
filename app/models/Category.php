@@ -14,6 +14,7 @@ class Category extends Model {
 
     public function getById($id) {
 
+        return $this -> fetchOne($id);
     }
 
     public function insertCategory($name, $description) {
