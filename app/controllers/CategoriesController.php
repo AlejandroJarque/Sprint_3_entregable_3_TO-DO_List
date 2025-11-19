@@ -18,8 +18,8 @@ class CategoriesController extends ApplicationController {
             throw new Exception("Metodo no permitido");
         }
 
-        $name = trim($_POST['categori_name'] ?? '');
-        $description = trim($_POST['categori_description'] ?? '');
+        $name = trim($_POST['category_name'] ?? '');
+        $description = trim($_POST['category_description'] ?? '');
 
         if($name === '' || $description === '') {
              
@@ -62,8 +62,8 @@ class CategoriesController extends ApplicationController {
             
         }
 
-        $name = trim($_POST['categori_name'] ?? '');
-        $description = trim($_POST['categori_description'] ?? '');
+        $name = trim($_POST['category_name'] ?? '');
+        $description = trim($_POST['categort_description'] ?? '');
 
         if($name === '') {
             header("Location: ". WEB_ROOT . "/categories/edit/$id");

@@ -20,7 +20,7 @@ class Category extends Model {
     public function insertCategory($name, $description) {
 
         $sql = "INSERT INTO categories
-            (categori_name, categori_description, created_at, updated_at)
+            (category_name, category_description, created_at, updated_at)
             VALUES
             (:name, :description, :created, :updated)";
 
@@ -38,8 +38,8 @@ class Category extends Model {
 
         $sql = "UPDATE categories
                 SET
-                    categori_name = :name,
-                    categori_description = :description,
+                    category_name = :name,
+                    category_description = :description,
                     updated_at = :updated
                 WHERE id = :id";
         
@@ -56,6 +56,7 @@ class Category extends Model {
 
     public function deleteCategory($id) {
 
+        return $this -> delete($id);
     }
 }
 ?>
