@@ -43,9 +43,9 @@ class CategoriesController extends ApplicationController {
         }
 
         $categoryModel = new Category();
-        $category = $categoryModel -> getBYId($id);
+        $category = $categoryModel -> getById($id);
 
-        if(!$id) {
+        if(!$category) {
             throw new Exception("Categoria no encontrada");
             
         }
@@ -63,7 +63,7 @@ class CategoriesController extends ApplicationController {
         }
 
         $name = trim($_POST['category_name'] ?? '');
-        $description = trim($_POST['categort_description'] ?? '');
+        $description = trim($_POST['category_description'] ?? '');
 
         if($name === '') {
             header("Location: ". WEB_ROOT . "/categories/edit/$id");

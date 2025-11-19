@@ -7,7 +7,7 @@
 
 <?php else: ?>
 
-    <style>
+<style>
 .table-categories {
     width: 100%;
     border-collapse: collapse;
@@ -23,9 +23,9 @@
     background-color: #f5f5f5;
     font-weight: bold;
 }
-
 </style>
-    <table calss = "table-categories">
+
+    <table class = "table-categories">
         <thead>
             <tr>
                 <th>ID</th>
@@ -40,8 +40,8 @@
             <?php foreach ($this->categories as $c): ?>
                 <tr>
                     <td><?= $c->id ?></td>
-                    <td><?= htmlspecialchars($c->categori_name) ?></td>
-                    <td><?= htmlspecialchars($c->categori_description) ?></td>
+                    <td><?= htmlspecialchars($c->category_name) ?></td>
+                    <td><?= htmlspecialchars($c->category_description) ?></td>
 
                     <td>
                         <a href="<?= WEB_ROOT ?>/categories/edit/<?= $c->id ?>">

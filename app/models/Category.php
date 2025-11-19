@@ -26,7 +26,7 @@ class Category extends Model {
 
         $stmt = $this -> _dbh -> prepare($sql);
 
-        $ok = $stmt -> execute([
+        return $stmt -> execute([
             ':name' => $name,
             ':description' => $description,
             ':created' => date('Y-m-d H:i:s'),

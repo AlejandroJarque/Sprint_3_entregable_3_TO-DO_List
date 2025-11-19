@@ -3,12 +3,14 @@
 <form action="<?= WEB_ROOT ?>/categories/update/<?= $this->category->id ?>" method="POST">
 
     <label>Nombre:</label><br>
-    <input type="text" name="categori_name" value="<?= htmlspecialchars($this->category->categori_name) ?>" required>
+    <input type="text" name="category_name" value="<?= htmlspecialchars($this->category->category_name) ?>" required>
     <br><br>
 
     <label>Descripcion:</label><br>
-    <textarea name="categori_description" rows="4"><?= htmlspecialchars($this->category->categori_description) ?></textarea>
+    <textarea name="category_description" rows="4"><?= htmlspecialchars($this->category->category_description) ?></textarea>
     <br><br>
 
     <button type="submit">Actualizar</button>
 </form>
+
+<p><a href="<?= WEB_ROOT ?>/categories">← Volver al listado</a></p>
