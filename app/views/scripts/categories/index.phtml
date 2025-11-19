@@ -1,1 +1,64 @@
 
+<h1>Lista de Categorías</h1>
+
+<?php if(count($this->categories) === 0): ?>
+
+    <p> No hay categorías creadas.<p>
+
+<?php else: ?>
+
+    <style>
+.table-categories {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-categories th,
+.table-categories td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.table-categories th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+</style>
+    <table calss = "table-categories">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach ($this->categories as $c): ?>
+                <tr>
+                    <td><?= $c->id ?></td>
+                    <td><?= htmlspecialchars($c->categori_name) ?></td>
+                    <td><?= htmlspecialchars($c->categori_description) ?></td>
+
+                    <td>
+                        <a href="<?= WEB_ROOT ?>/categories/edit/<?= $c->id ?>">
+                            Editar
+                        </a>
+                    </td>
+
+                    <td>
+                        <form action="<?= WEB_ROOT ?>/categories/delete/<?= $c->id ?>" method="post" style = "display:inline;">
+                            <button type= "submit" onclick="return confirm('¿Seguro?');">
+                                Borrar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+<?php endif; ?>
