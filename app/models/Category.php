@@ -6,6 +6,10 @@ class Category extends Model {
 
     public function getAll() {
 
+        $sql = "SELECT * FROM categories ORDER BY id DESC";
+        $statement = $this -> _dbh -> prepare($sql);
+        $statement -> execute();
+        return $statement -> fetchAll(PDO::FETCH_OBJ);
     }
 
     public function getById($id) {
