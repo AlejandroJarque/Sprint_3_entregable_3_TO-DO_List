@@ -36,6 +36,21 @@ class CategoriesController extends ApplicationController {
 
     public function editAction() {
 
+        $id = $this -> _getParam('id');
+
+        if(!$id) {
+            throw new Exception("ID no proporcionado");
+        }
+
+        $categoryModel = new Category();
+        $category = $categoryModel -> getBYId($id);
+
+        if(!$id) {
+            throw new Exception("Categoria no encontrada");
+            
+        }
+
+        $this -> view -> category = $category;
     }
 
     public function updateAction() {
