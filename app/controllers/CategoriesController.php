@@ -23,7 +23,7 @@ class CategoriesController extends ApplicationController {
     }
 
     public function deleteAction() {
-        
+
     }
 }
 ?>
