@@ -1,14 +1,13 @@
 <?php 
 
-/**
- * Used to define the routes in the system.
- * 
- * A route should be defined with a key matching the URL and an
- * controller#action-to-call method. E.g.:
- * 
- * '/' => 'index#index',
- * '/calendar' => 'calendar#index'
- */
 $routes = array(
 	'/test' => 'test#index'
 );
+
+$routes['/categories'] = 'Categories#index';
+$routes['/categories/index'] = 'Categories#index';
+$routes['/categories/create'] = 'Categories#create';
+$routes['/categories/store'] = 'Categories#store';
+$routes['/categories/edit/:id'] = 'Categories#edit';
+$routes['/categories/update/:id'] = 'Categories#update';
+$routes['/categories/delete/:id'] = 'Categories#delete';
