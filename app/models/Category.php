@@ -19,6 +19,19 @@ class Category extends Model {
 
     public function insertCategory($name, $description) {
 
+        $sql = "INSERT INTO categories
+            (categori_name, categori_description, created_at, updated_at)
+            VALUES
+            (:name, :description, :created, :updated)";
+
+        $stmt = $this -> _dbh -> prepare($sql);
+
+        $ok = $stmt -> execute([
+            ':name' => $name,
+            ':description' => $description,
+            ':created' => date('Y-m-d H:i:s'),
+            ':updated' => date('Y-m-d H:i:s')
+        ]);
     }
 
     public function updateCategory($id, $name, $description) {
