@@ -79,6 +79,18 @@ class CategoriesController extends ApplicationController {
 
     public function deleteAction() {
 
+        $id = $this->_getParam('id');
+
+        if(!$id) {
+            throw new Exception("ID no proporcionado");
+        }
+
+        $model = new Category();
+        $model->deleteCategory($id);
+
+        header("Location: ". WEB_ROOT . "/categories");
+        exit;
+    
     }
 }
 ?>
