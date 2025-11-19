@@ -36,6 +36,22 @@ class Category extends Model {
 
     public function updateCategory($id, $name, $description) {
 
+        $sql = "UPDATE categories
+                SET
+                    categori_name = :name,
+                    categori_description = :description,
+                    updated_at = :updated
+                WHERE id = :id";
+        
+        $stmt = $this->_dbh->prepare($sql);
+
+        return $stmt->execute([
+            ':id' => $id,
+            ':name' => $name,
+            ':description' => $description,
+            ':updated' => date('Y-m-d H:i:s')
+        ]);
+
     }
 
     public function deleteCategory($id) {
