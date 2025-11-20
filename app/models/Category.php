@@ -20,6 +20,11 @@ class Category {
         return json_decode($json, true) ?? [];
     }
 
+    private function save($data) {
+
+        file_put_contents($this-> file, json_encode($data, JSON_PRETTY_PRINT));
+    }
+
     public function getAll() {
 
         $sql = "SELECT * FROM categories ORDER BY id DESC";
