@@ -11,3 +11,4 @@ $routes['/categories/store'] = 'Categories#store';
 $routes['/categories/edit/:id'] = 'Categories#edit';
 $routes['/categories/update/:id'] = 'Categories#update';
 $routes['/categories/delete/:id'] = 'Categories#delete';
+$routes['/categories/json'] = 'Categories#json';
