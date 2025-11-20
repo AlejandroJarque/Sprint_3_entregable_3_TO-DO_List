@@ -53,44 +53,53 @@ class Category {
 
     public function insertCategory($name, $description) {
 
-        $sql = "INSERT INTO categories
-            (category_name, category_description, created_at, updated_at)
-            VALUES
-            (:name, :description, :created, :updated)";
+        $categories = $this -> load();
 
-        $stmt = $this -> _dbh -> prepare($sql);
+        $id = empty($categories)
+            ? 1
+            : max(array_column($categories, 'id')) +1;
 
-        return $stmt -> execute([
-            ':name' => $name,
-            ':description' => $description,
-            ':created' => date('Y-m-d H:i:s'),
-            ':updated' => date('Y-m-d H:i:s')
-        ]);
+        $newCategory = [
+            'id' => $id,
+            'category_name' => $name,
+            'category_description' => $description,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        $categories[] = $newCategory;
+        $this-> save($categories);
+        return true;
     }
 
     public function updateCategory($id, $name, $description) {
 
-        $sql = "UPDATE categories
-                SET
-                    category_name = :name,
-                    category_description = :description,
-                    updated_at = :updated
-                WHERE id = :id";
-        
-        $stmt = $this->_dbh->prepare($sql);
+        $categories = $this -> load();
 
-        return $stmt->execute([
-            ':id' => $id,
-            ':name' => $name,
-            ':description' => $description,
-            ':updated' => date('Y-m-d H:i:s')
-        ]);
+        foreach($categories as &$cat) {
+            if($cat['id'] == $id) {
 
+                $cat['category_name'] = $name;
+                $cat['category_description'] = $description;
+                $cat['update_at'] = date('Y-m-d H:i:s');
+            }
+        }
+
+        $this -> save($categories);
+        return true;
     }
 
     public function deleteCategory($id) {
 
-        return $this -> delete($id);
+        $categories = $this -> load();
+
+        $categories = array_filter($categories, function($cat) use ($id) {
+            return $cat['id'] != $id;
+        });
+
+        $categories = array_values($categories);
+        $this->save($categories);
+        return true;
     }
 }
 ?>
