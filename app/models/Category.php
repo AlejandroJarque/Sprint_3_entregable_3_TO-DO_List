@@ -1,8 +1,24 @@
 <?php
 
-class Category extends Model {
+class Category {
 
-    protected $_table = 'categories';
+    protected $file;
+
+    public function __construct()
+    {
+        $this -> file = ROOT_PATH . 'app/data/categories.json';
+    }
+
+    private function load() {
+
+        if(!file_exists($this -> file)) {
+
+            return [];
+        }
+
+        $json = file_get_contents($this -> file);
+        return json_decode($json, true) ?? [];
+    }
 
     public function getAll() {
 
