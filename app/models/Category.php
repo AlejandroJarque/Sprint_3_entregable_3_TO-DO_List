@@ -27,15 +27,28 @@ class Category {
 
     public function getAll() {
 
-        $sql = "SELECT * FROM categories ORDER BY id DESC";
-        $statement = $this -> _dbh -> prepare($sql);
-        $statement -> execute();
-        return $statement -> fetchAll(PDO::FETCH_OBJ);
+        $categories = $this -> load();
+
+        usort($categories, function ($a, $b) {
+            return $b['id'] <=> $a['id'];
+        });
+
+        return array_map(function($cat) {
+            return (object) $cat;
+        }, $categories);
     }
 
     public function getById($id) {
 
-        return $this -> fetchOne($id);
+        $categories = $this->load();
+
+        foreach($categories as $cat) {
+            if($cat['id'] == $id) {
+                return (object)$cat;
+            }
+        }
+
+        return null;
     }
 
     public function insertCategory($name, $description) {
