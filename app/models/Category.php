@@ -2,11 +2,11 @@
 
 class Category {
 
-    protected $file;
+    private $file;
 
     public function __construct()
     {
-        $this -> file = ROOT_PATH . 'app/data/categories.json';
+        $this -> file = ROOT_PATH . '/app/data/categories.json';
     }
 
     private function load() {
@@ -22,7 +22,7 @@ class Category {
 
     private function save($data) {
 
-        file_put_contents($this-> file, json_encode($data, JSON_PRETTY_PRINT));
+        file_put_contents($this->file, json_encode($data, JSON_PRETTY_PRINT));
     }
 
     public function getAll() {
@@ -81,7 +81,7 @@ class Category {
 
                 $cat['category_name'] = $name;
                 $cat['category_description'] = $description;
-                $cat['update_at'] = date('Y-m-d H:i:s');
+                $cat['updated_at'] = date('Y-m-d H:i:s');
             }
         }
 
