@@ -1,0 +1,16 @@
+<h1>Editar categoría</h1>
+
+<form action="<?= WEB_ROOT ?>/categories/update/<?= $this->category->id ?>" method="POST">
+
+    <label>Nombre:</label><br>
+    <input type="text" name="category_name" value="<?= htmlspecialchars($this->category->category_name) ?>" required>
+    <br><br>
+
+    <label>Descripcion:</label><br>
+    <textarea name="category_description" rows="4"><?= htmlspecialchars($this->category->category_description) ?></textarea>
+    <br><br>
+
+    <button type="submit">Actualizar</button>
+</form>
+
+<p><a href="<?= WEB_ROOT ?>/categories">← Volver al listado</a></p>

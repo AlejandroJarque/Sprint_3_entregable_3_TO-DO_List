@@ -1,0 +1,19 @@
+<h1>Crear nueva categoría</h1>
+
+<form action="<?= WEB_ROOT ?>/categories/store" method="POST">
+
+    <div>
+        <label>Nombre:</label><br>
+        <input type="text" name="category_name" required>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <label>Descripción:</label><br>
+        <textarea name="category_description" rows="4"></textarea>
+    </div>
+
+    <button type="submit" style="margin-top: 15px;">Guardar</button>
+
+</form>
+
+<p><a href="<?= WEB_ROOT ?>/categories">← Volver al listado</a></p>

@@ -1,0 +1,75 @@
+
+<h1>Lista de Categorías</h1>
+
+<?php if(count($this->categories) === 0): ?>
+
+    <p> No hay categorías creadas.<p>
+
+<?php else: ?>
+
+<style>
+.table-categories {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-categories th,
+.table-categories td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.table-categories th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.table-categories td {
+    text-align: center;
+    vertical-align: middle;
+}
+</style>
+
+    <button type="submit" style = "text-decoration: none;">
+        <a href="<?= WEB_ROOT ?>/categories/create" class="btn-add">➕ Crear categoría</a><br>
+    </button><br><br>
+
+    <table class = "table-categories">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach ($this->categories as $c): ?>
+                <tr>
+                    <td><?= $c->id ?></td>
+                    <td><?= htmlspecialchars($c->category_name) ?></td>
+                    <td><?= htmlspecialchars($c->category_description) ?></td>
+
+                    <td>
+                        <a href="<?= WEB_ROOT ?>/categories/edit/<?= $c->id ?>">
+                            <button type="submit">
+                                📝Editar
+                            </button>
+                        </a>
+                    </td>
+
+                    <td>
+                        <form action="<?= WEB_ROOT ?>/categories/delete/<?= $c->id ?>" method="post" style = "display:inline;">
+                            <button type= "submit" onclick="return confirm('¿Seguro?');">
+                                🗑️Borrar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+<?php endif; ?>
