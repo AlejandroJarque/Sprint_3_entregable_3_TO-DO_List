@@ -5,4 +5,5 @@ $routes = array(
 );
 
 $routes['/'] = 'Home#index';
-$routes['/dashboard'] = 'Home#index';
+$routes['/home'] = 'Home#index';
+$routes['/home/index'] = 'Home#index';
