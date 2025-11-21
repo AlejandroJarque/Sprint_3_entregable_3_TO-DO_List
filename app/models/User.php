@@ -1,5 +1,5 @@
 <?php
-class Users {
+class User {
     private $file;
 
     public function __construct() {
