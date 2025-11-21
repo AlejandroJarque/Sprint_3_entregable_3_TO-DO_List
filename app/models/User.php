@@ -41,6 +41,16 @@ class User {
         }
         return null;
     }
+    public function getByUsername($username) {
+        $users = $this->load();
+
+        foreach($users as $user) {
+            if($user['user_username'] === $username) {
+                return (object)$user;
+            }
+        }
+        return null;
+    }
 
     public function insertUser($name, $surname, $username, $email, $password) { //$user_password ??
         $users = $this->load();
