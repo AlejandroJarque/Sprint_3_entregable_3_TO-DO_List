@@ -47,7 +47,16 @@ class TasksController extends ApplicationController {
     }
     
     public function editAction(){
-
+        $id = $this->_getParam('id');
+        if(!$id){
+            throw new Exception("ID no proporcionado");
+        }
+        $model = new Task();
+        $task = $model->getById($id);
+        if(!$task){
+            throw new Exception("Tarea no encontrada");
+        }
+        $this->view->task = $task;
     }
 
 }
