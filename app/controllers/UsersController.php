@@ -1,10 +1,93 @@
 <?php
 class UsersController extends ApplicationController {
+    public function indexAction() {
+        $userModel = new User();
+        $this->view->users = $userModel->getAll();
+    }
+    public function createAction() {
+
+    }
+    public function storeAction() {
+        if($_SERVER['REQUEST_METHOD']!=='POST') {
+            throw new Exception("Method not allowed");
+        }
+
+        $name=trim($_POST['user_name']??'');
+        $surname=trim($_POST['user_surname']??'');
+        $username=trim($_POST['user_username']??'');
+        $email=trim($_POST['user_email']??'');
+        $password=trim($_POST['user_password']??'');
+
+        if($name === '' || $surname === '' || $username === '' || $email === '' || $password === '') {
+            header('Location: ' . WEB_ROOT . '/users/register');
+            exit;
+        }
+
+        $userModel = new User();
+        $userModel -> insertUser($name, $surname, $username, $email, $password);
+
+        header('Location: ' . WEB_ROOT . '/users');
+        exit;
+    }
+    public function editAction() {
+        $id = $this->_getParam('id');
+
+        if(!$id) {
+            throw new Exception("ID not provided");
+        }
+
+        $userModel = new User();
+        $user = $userModel->getById($id);
+
+        if(!$user) {
+            throw new Exception("User not found");
+        }
+
+        $this->view->user = $user;
+    }
+    public function updateAction() {
+        $id = $this->_getParam('id');
+
+        if($_SERVER['REQUEST_METOD']!=='POST') {
+            throw new Exception("Method not allowed");
+        }
+
+        $name=trim($_POST['user_name']??'');
+        $surname=trim($_POST['user_surname']??'');
+        $username=trim($_POST['user_username']??'');
+        $email=trim($_POST['user_email']??'');
+        $password=trim($_POST['user_password']??'');
+
+        if($name === '') {
+            header("Location: " . WEB_ROOT . "/users/edit/$id");
+            exit;
+        }
+
+        $model = new User();
+        $model->updateUser($id, $name, $surname, $username, $email, $password);
+
+        header("Location: " . WEB_ROOT . "/users");
+        exit;
+    }
+    public function deleteAction() {
+        $id = $this->_getParam('id');
+
+        if(!$id) {
+            throw new Exception("ID not provided");
+        }
+
+        $model = new User();
+        $model->deleteUser($id);
+
+        header("Location: " . WEB_ROOT . "/users");
+        exit;
+    }
+
     public function loginAction() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $username = trim($_POST['username'] ?? '');
-            $password = trim($_POST['password'] ?? '');
+            $username = trim($_POST['user_username'] ?? '');
+            $password = trim($_POST['user_password'] ?? '');
 
             if($username === '' || $password === '') {
                 $this->view->error = "You must fill in all fields.";
@@ -25,7 +108,7 @@ class UsersController extends ApplicationController {
 
             session_start();
             $_SESSION['user_id'] = $user->id;
-            $_SESSION['username'] = $user->user_username;
+            $_SESSION['user_username'] = $user->user_username;
 
             header("Location: " . WEB_ROOT . "/users/profile");
             exit;
@@ -52,6 +135,9 @@ class UsersController extends ApplicationController {
 
         $model = new User();
         $model ->insertUser($name, $surname, $username, $email, $passwordHash);
+
+        session_start();
+        $_SESSION['user_username'] = $username;
 
         header("Location: " . WEB_ROOT . "/users/profile");
         exit;

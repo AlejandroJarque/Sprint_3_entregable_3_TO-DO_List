@@ -4,6 +4,10 @@ class User {
 
     public function __construct() {
         $this->file = ROOT_PATH.'/app/data/users.json';
+
+        if (!file_exists($this->file)) {
+            file_put_contents($this->file, "[]");
+        }
     }
 
     private function load() {
@@ -68,6 +72,22 @@ class User {
         ];
 
         $users[]=$newUser;
+        $this->save($users);
+        return true;
+    }
+    public function updateUser($id, $name, $surname, $username, $email, $password) {
+        $users = $this->load();
+
+        foreach($users as &$user) {
+            if($user['id']==$id) {
+
+                $user['user_name']=$name;
+                $user['user_surname']=$surname;
+                $user['user_username']=$username;
+                $user['user_email']=$email;
+                $user['user_password']=$password;
+            }
+        }
         $this->save($users);
         return true;
     }
