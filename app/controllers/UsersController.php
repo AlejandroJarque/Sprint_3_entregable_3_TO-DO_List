@@ -53,7 +53,7 @@ class UsersController extends ApplicationController {
         $model = new User();
         $model ->insertUser($name, $surname, $username, $email, $passwordHash);
 
-        header("Location: " . WEB_ROOT . "/users");
+        header("Location: " . WEB_ROOT . "/users/profile");
         exit;
     }
 

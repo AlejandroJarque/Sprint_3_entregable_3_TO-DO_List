@@ -55,9 +55,8 @@ class User {
     public function insertUser($name, $surname, $username, $email, $password) { //$user_password ??
         $users = $this->load();
 
-        $id = empty($users)
-        ?1
-        :max(array_column($users, 'id'))+1;
+        $ids = array_column($users, 'id');
+        $id = empty($ids) ? 1 : max($ids) + 1;
 
         $newUser = [
             'id'=>$id,
