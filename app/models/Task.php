@@ -23,7 +23,14 @@ public function __construct(){
         usort($tasks,function ($a, $b) {return $b['id'] <=> $a['id']; } );
         return array_map(function ($tas) {return(object) $tas;}, $tasks);
     }
-    public function getById(){
+    public function getById(int $id){
+        $tasks = $this->load();
+        foreach($tasks as $tas){
+            if($tas['id'] == $id){
+                return (object)$tas;
+            }
+        }
+        return null;
 
     }
     public function insertTask(){
