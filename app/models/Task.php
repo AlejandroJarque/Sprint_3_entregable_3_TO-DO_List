@@ -15,11 +15,13 @@ public function __construct(){
     }
     private function save($data){
         file_put_contents($this->file,json_encode($data,JSON_PRETTY_PRINT));
-        
+
     }
     
     public function getAll(){
-
+        $tasks = $this->load();
+        usort($tasks,function ($a, $b) {return $b['id'] <=> $a['id']; } );
+        return array_map(function ($tas) {return(object) $tas;}, $tasks);
     }
     public function getById(){
 
