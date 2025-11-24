@@ -7,10 +7,15 @@ public function __construct(){
 }
 
     private function load(){
-
+        if(!file_exists($this->file)){
+            return [];
+        }
+        $json = file_get_contents($this->file);
+        return json_decode($json,true)??[];
     }
-    private function save(){
-
+    private function save($data){
+        file_put_contents($this->file,json_encode($data,JSON_PRETTY_PRINT));
+        
     }
     
     public function getAll(){
