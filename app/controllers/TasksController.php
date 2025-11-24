@@ -12,6 +12,22 @@ class TasksController extends ApplicationController {
 
     }
     public function storeAction(){
+        if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+            throw new Exception('Metodo no permitido');
+
+        }
+        $name = trim($_POST['tasks_name'] ?? '');
+        $description = trim($_POST['tasks_description'] ?? '');
+
+        if($name === ''){
+            header("Location: " . WEB_ROOT . "/tasks/create");
+            exit;
+        }
+        $model = new Task();
+        $model ->insertTask($name,$description);
+
+        header("Location: " . WEB_ROOT . "/tasks");
+        exit;
 
     }
     public function updateAction(){
