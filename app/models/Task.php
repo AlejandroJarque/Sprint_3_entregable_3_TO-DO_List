@@ -49,11 +49,28 @@ public function __construct(){
             return true;
         }
 
-        public function updateTask(){
-
+        public function updateTask(int $id,string $name, string $description){
+            $tasks = $this->load();
+            foreach($tasks as $tas){
+                if($tas['id'] == $id){
+                    $tas['tasks_name'] = $name;
+                    $tas['tasks_description'] = $description;
+                    $tas['task_at'] = date('Y-m-d H:i:s');
+                }
+            }
+            $this -> save($tasks);
+            return true;
         }
     
-        public function deleteTask(){
+        public function deleteTask($id){
+            $tasks = $this->load();
+
+            $tasks = array_filter($tasks,function ($tas) use($id) {
+                return $tas['id'] != $id;});
+
+                $tasks = array_values($tasks);
+                $this->save($tasks);
+                return true;
 
         }
 
