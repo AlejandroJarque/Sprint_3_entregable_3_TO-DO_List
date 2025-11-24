@@ -1,1 +1,20 @@
 <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login Form</title>
+    </head>
+    <body>
+        <form method="POST" action="<?= WEB_ROOT ?>/users/login">
+        <p>
+            <label for = "user_username">UserName: </label><br/>
+            <input type = "text" id = "user_username" name = "user_username">
+        </p>
+        <p>
+            <label for = "user_password">Password: </label><br/>
+            <input type = "password" id = "user_password" name = "user_password">
+        </p>
+        <p>
+            <button type = "submit">Login</button>
+        </p>
+    </body>
+</html>
