@@ -34,7 +34,8 @@ class UsersController extends ApplicationController {
     
     public function registerAction() {
         if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            throw new Exception("Método no permitido");
+            return;
+            //throw new Exception("Método no permitido");
         }
 
         $name = trim($_POST['user_name'] ?? '');
@@ -57,7 +58,7 @@ class UsersController extends ApplicationController {
     }
 
     public function profileAction() {
-        $this->view->setLayout('main');
+        // $this->view->setLayout('main');
 
         $userModel = new User();
         $this->view->users = $userModel->getAll();

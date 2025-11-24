@@ -1,1 +1,32 @@
-<h1> Inside the register form </h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Register Form</title>
+    </head>
+    <body>
+        <form method="POST" action="<?= WEB_ROOT ?>/users/register">
+        <p>
+            <label for = "user_name">Name: </label><br/>
+            <input type = "text" id = "user_name" name = "user_name">
+        </p>
+        <p>
+            <label for = "user_surname">Surname: </label><br/>
+            <input type = "text" id = "user_surname" name = "user_surname">
+        </p>
+        <p>
+            <label for = "user_username">UserName: </label><br/>
+            <input type = "text" id = "user_username" name = "user_username" required>
+        </p>
+        <p>
+            <label for = "user_password">Password: </label><br/>
+            <input type = "password" id = "user_password" name = "user_password"
+                    minlength="8" required>
+        </p>
+        <p>
+            <label for = "user_email">Email: </label><br/>
+            <input type = "email" id = "user_email" name = "user_email" required>
+        </p>
+
+        <button type = "submit">Register</button>
+    </body>
+</html>
