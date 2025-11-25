@@ -1,33 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Register Form</title>
-    </head>
-    <body>
-        <form method="POST" action="<?= WEB_ROOT ?>/users/register">
-        <p>
-            <label for = "user_name">Name: </label><br/>
-            <input type = "text" id = "user_name" name = "user_name">
-        </p>
-        <p>
-            <label for = "user_surname">Surname: </label><br/>
-            <input type = "text" id = "user_surname" name = "user_surname">
-        </p>
-        <p>
-            <label for = "user_username">UserName: </label><br/>
-            <input type = "text" id = "user_username" name = "user_username" required>
-        </p>
-        <p>
-            <label for = "user_password">Password: </label><br/>
-            <input type = "password" id = "user_password" name = "user_password"
-                    minlength="8" required>
-        </p>
-        <p>
-            <label for = "user_email">Email: </label><br/>
-            <input type = "email" id = "user_email" name = "user_email" required>
-        </p>
 
-        <button type = "submit" name="register">Register</button>
-    </form>
-    </body>
-</html>
+<html lang="en">
+<div class="max-w-md mx-auto bg-white rounded-x1 shadow p-8">
+    <h2 class="text-3x1 font-semibold text-brandBrown text-center mb-6">
+        Register Form
+    </h2>
+        <?php if(!empty($errors)): ?>
+            <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+                <?php foreach($errors as $e): ?>
+                    <p><?=  $e ?></p>
+                <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="POST" action="<?= WEB_ROOT ?>/users/register">
+                <div>
+                    <label class="block text-brandBrown font-medium">Name: </label>
+                    <input type = "text" id = "user_name" name = "user_name"
+                        class="w-full border border-brandBrown/30 rounded px-3 py-2 focus:ring focus:ring-brandBrown/40"
+                        required>
+                </div>
+        
+                <div>
+                    <label class="block text-brandBrown font-medium">Surname: </label>
+                    <input type = "text" id = "user_surname" name = "user_surname"
+                        class="w-full border border-brandBrown/30 rounded px-3 py-2 focus:ring focus:ring-brandBrown/40"
+                        required>
+                    </div>
+
+                    <div>
+                        <label class="block text-brandBrown font-medium">Email: </label>
+                        <input type = "text" id = "user_username" name = "user_username"
+                            class="w-full border border-brandBrown/30 rounded px-3 py-2 focus:ring focus:ring-brandBrown/40"
+                            required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-brandBrown font-medium">Password: </label>
+                        <input type = "password" id = "user_password" name = "user_password"
+                        minlength="8"
+                        class="w-full border border-brandBrown/30 rounded px-3 py-2 focus:ring focus:ring-brandBrown/40"
+                        required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-brandBrown font-medium">Email: </label>
+                        <input type = "email" id = "user_email" name = "user_email" 
+                        class="w-full border border-brandBrown/30 rounded px-3 py-2 focus:ring focus:ring-brandBrown/40"
+                        required>
+                    </div>
+
+            <button type = "submit"
+                    class="w-full bg-brandBrown text-white py-2 rounded-lg shadow hover:bg-brandBrown/90 transition">
+                    Register
+                </button>
+        </form>
+
+        <p class="text-center mt-4 text-brandBrown/80">
+            Do you already have an acount?
+            <a href="<?=  WEB_ROOT ?>/users/login" class="text-brandBrown font-semibold underline">Login </a>
+        </p>
+    </div>
