@@ -48,7 +48,7 @@ class UsersController extends ApplicationController {
     public function updateAction() {
         $id = $this->_getParam('id');
 
-        if($_SERVER['REQUEST_METOD']!=='POST') {
+        if($_SERVER['REQUEST_METHOD']!=='POST') {
             throw new Exception("Method not allowed");
         }
 
@@ -116,31 +116,22 @@ class UsersController extends ApplicationController {
     }
     
     public function registerAction() {
-        if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return;
-            //throw new Exception("Método no permitido");
-        }
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        $name = trim($_POST['user_name'] ?? '');
-        $surname = trim($_POST['user_surname'] ?? '');
-        $username = trim($_POST['user_username'] ?? '');
-        $email = trim($_POST['user_email'] ?? '');
-        $password = trim($_POST['user_password'] ?? '');
+            require_once __DIR__ . '/../models/User.php';
+            $user = new User();
 
-        if($name === '' || $surname === '' || $username === '' || $email === '' || $password === '') {
-            header("Location: " . WEB_ROOT . "/users/register");
+            $user->insertUser(
+                $_POST['user_name'],
+                $_POST['user_surname'],
+                $_POST['user_username'],
+                $_POST['user_email'],
+                $_POST['user_password']
+            );
+
+            header("Location: " . WEB_ROOT . "/users/profile");
             exit;
         }
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-        $model = new User();
-        $model ->insertUser($name, $surname, $username, $email, $passwordHash);
-
-        session_start();
-        $_SESSION['user_username'] = $username;
-
-        header("Location: " . WEB_ROOT . "/users/profile");
-        exit;
     }
 
     public function profileAction() {

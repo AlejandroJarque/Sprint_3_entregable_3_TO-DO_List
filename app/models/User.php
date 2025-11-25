@@ -3,7 +3,7 @@ class User {
     private $file;
 
     public function __construct() {
-        $this->file = ROOT_PATH.'/app/data/users.json';
+        $this->file = dirname(__DIR__) . '/data/users.json';
 
         if (!file_exists($this->file)) {
             file_put_contents($this->file, "[]");
@@ -11,11 +11,8 @@ class User {
     }
 
     private function load() {
-        if(!file_exists($this->file)) {
-            return [];
-        }
-        $json = file_get_contents($this->file);
-        return json_decode($json, true)??[];
+    $data = file_get_contents($this->file);
+        return json_decode($data, true)??[];
     }
 
      private function save($data) {
@@ -59,8 +56,7 @@ class User {
     public function insertUser($name, $surname, $username, $email, $password) { //$user_password ??
         $users = $this->load();
 
-        $ids = array_column($users, 'id');
-        $id = empty($ids) ? 1 : max($ids) + 1;
+        $id = empty($users) ? 1 : max(array_column($users, 'id')) +1;
 
         $newUser = [
             'id'=>$id,
@@ -75,6 +71,8 @@ class User {
         $this->save($users);
         return true;
     }
+
+
     public function updateUser($id, $name, $surname, $username, $email, $password) {
         $users = $this->load();
 

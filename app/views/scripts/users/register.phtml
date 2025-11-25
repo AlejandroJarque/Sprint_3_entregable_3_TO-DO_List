@@ -2,10 +2,6 @@
 <html lang="en">
     <head>
         <title>Register Form</title>
-        <?php if(count($this->users) === 0): ?>
-            <p> No users created </p>
-
-            <?php else: ?>
     </head>
     <body>
         <form method="POST" action="<?= WEB_ROOT ?>/users/register">
@@ -31,8 +27,7 @@
             <input type = "email" id = "user_email" name = "user_email" required>
         </p>
 
-        <button type = "submit">Register</button>
+        <button type = "submit" name="register">Register</button>
     </form>
     </body>
 </html>
-<?php endif; ?>
