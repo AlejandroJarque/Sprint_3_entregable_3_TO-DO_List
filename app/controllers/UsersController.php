@@ -135,9 +135,18 @@ class UsersController extends ApplicationController {
     }
 
     public function profileAction() {
-        // $this->view->setLayout('main');
+        $this->view->setLayout('main');
 
         $userModel = new User();
         $this->view->users = $userModel->getAll();
+        
+        /*session_start();
+        if(!isset($_SESSION['user'])) {
+            header("Location: " . WEB_ROOT . "/users/login");
+            exit;
+        }
+
+        $user = $_SESSION['user'];
+        $this->view->user = $user;*/
     }
 }
