@@ -1,19 +1,31 @@
-<h1>Crear nueva categoría</h1>
+<h2 class="text-3xl font-bold text-brandBrown mb-6">Crear nueva categoría</h2>
 
-<form action="<?= WEB_ROOT ?>/categories/store" method="POST">
+<div class="bg-white shadow rounded-xl p-8">
+
+<form action="<?= WEB_ROOT ?>/categories/store" method="POST" class="space-y-5">
 
     <div>
-        <label>Nombre:</label><br>
-        <input type="text" name="category_name" required>
+        <label class="block text-brandBrown font-medium">Nombre</label>
+        <input type="text" name="category_name"
+               class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40"
+               required>
     </div>
 
-    <div style="margin-top: 10px;">
-        <label>Descripción:</label><br>
-        <textarea name="category_description" rows="4"></textarea>
+    <div>
+        <label class="block text-brandBrown font-medium">Descripción</label>
+        <textarea name="category_description"
+                  class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28 focus:ring-brandBrown/40"></textarea>
     </div>
 
-    <button type="submit" style="margin-top: 15px;">Guardar</button>
+    <button type="submit"
+            class="w-full bg-brandBrown text-white py-3 rounded-lg shadow hover:bg-brandBrown/90 transition">
+        Guardar categoría
+    </button>
 
 </form>
 
-<p><a href="<?= WEB_ROOT ?>/categories">← Volver al listado</a></p>
+<p class="text-center mt-4">
+    <a href="<?= WEB_ROOT ?>/categories" class="text-brandBrown font-semibold underline">Volver</a>
+</p>
+
+</div>
