@@ -1,17 +1,5 @@
 [
     {
-        "id": 1,
-        "task_name": "app",
-        "task_description": "errores",
-        "status": "",
-        "start_time": "",
-        "end_time": "",
-        "categories": [],
-        "user": "",
-        "create_at": "2025-11-25 18:30:15",
-        "updated_at": "2025-11-25 18:30:15"
-    },
-    {
         "id": 2,
         "task_name": "proyectp",
         "task_description": "continuar corrigiendo",
@@ -22,29 +10,5 @@
         "user": "",
         "create_at": "2025-11-25 18:33:36",
         "updated_at": "2025-11-25 18:33:36"
-    },
-    {
-        "id": 3,
-        "task_name": "app",
-        "task_description": "error",
-        "status": "",
-        "start_time": "",
-        "end_time": "",
-        "categories": [],
-        "user": "",
-        "create_at": "2025-11-25 18:37:38",
-        "updated_at": "2025-11-25 18:37:38"
-    },
-    {
-        "id": 4,
-        "task_name": "app",
-        "task_description": "correcciones",
-        "status": "pendiente",
-        "start_time": "2025-11-25T18:50",
-        "end_time": "",
-        "categories": [],
-        "user": "",
-        "create_at": "2025-11-25 19:01:22",
-        "updated_at": "2025-11-25 19:01:22"
     }
 ]

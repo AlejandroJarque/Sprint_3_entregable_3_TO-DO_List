@@ -13,9 +13,9 @@ $routes['/tasks'] = 'Tasks#index';
 $routes['/tasks/index'] = 'Tasks#index';
 $routes['/tasks/create'] = 'Tasks#create';
 $routes['/tasks/store'] = 'Tasks#store';
-$routes['/tasks/edit'] = 'Tasks#edit';
-$routes['/tasks/update'] = 'Tasks#update';
-$routes['/tasks/delete'] = 'Tasks#delete';
+$routes['/tasks/edit/:id'] = 'Tasks#edit';
+$routes['/tasks/update/:id'] = 'Tasks#update';
+$routes['/tasks/delete/:id'] = 'Tasks#delete';
 
 $routes['/categories'] = 'Categories#index';
 $routes['/categories/index'] = 'Categories#index';
