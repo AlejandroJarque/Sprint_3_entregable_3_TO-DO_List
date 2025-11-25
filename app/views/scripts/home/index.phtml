@@ -1,7 +1,30 @@
-<h1>Bienvenido al Gestor de Tareas</h1>
+<div class="text-center space-y-8">
 
-<ul>
-    <li><a href="<?= WEB_ROOT ?>/users">Ir a Usuarios</a></li>
-    <li><a href="<?= WEB_ROOT ?>/categories">Ir a Categorías</a></li>
-    <li><a href="<?= WEB_ROOT ?>/tasks"></a>Ir a Tareas</li>
-</ul>
+    <h1 class="text-4xl font-bold text-brandBrown">
+        Bienvenido al Gestor de Tareas
+    </h1>
+
+    <p class="text-lg text-brown-800">
+        Selecciona un módulo para comenzar
+    </p>
+
+    <div class="flex flex-col items-center space-y-4">
+
+        <a href="<?= WEB_ROOT ?>/users"
+           class="bg-brandBrown text-white px-6 py-3 rounded-lg shadow hover:bg-brandBrown/90 transition w-60 text-center">
+            👤 Ir a Usuarios
+        </a>
+
+        <a href="<?= WEB_ROOT ?>/categories"
+           class="bg-brandBrown text-white px-6 py-3 rounded-lg shadow hover:bg-brandBrown/90 transition w-60 text-center">
+            🗂️ Ir a Categorías
+        </a>
+
+        <a href="<?= WEB_ROOT ?>/tasks"
+           class="bg-brandBrown text-white px-6 py-3 rounded-lg shadow hover:bg-brandBrown/90 transition w-60 text-center">
+            📝 Ir a Tareas
+        </a>
+
+    </div>
+
+</div>
