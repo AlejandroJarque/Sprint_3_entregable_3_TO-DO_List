@@ -36,9 +36,9 @@
                     </td>
 
                     <td class="p-3 text-center space-x-2">
-                        <a href="/tasks/show/<?= $tas->id ?>" class="text-blue-600 font-semibold hover:underline">Ver</a>
-                        <a href="/tasks/edit/<?= $tas->id ?>" class="text-green-600 font-semibold hover:underline">Editar</a>
-                        <a href="/tasks/delete/<?= $tas->id ?>" class="text-red-600 font-semibold hover:underline">Borrar</a>
+                        <a href="<?= WEB_ROOT ?>/tasks/show/<?= $tas->id ?>" class="text-blue-600 font-semibold hover:underline">Ver</a>
+                        <a href="<?= WEB_ROOT ?>/tasks/edit/<?= $tas->id ?>" class="text-green-600 font-semibold hover:underline">Editar</a>
+                        <a href="<?= WEB_ROOT ?>/tasks/delete/<?= $tas->id ?>" class="text-red-600 font-semibold hover:underline">Borrar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
