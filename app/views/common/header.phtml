@@ -1,10 +1,28 @@
-<header class="main-header">
-    <nav>
-        <ul>
-            <li><a href="<?= WEB_ROOT ?>/"></a>Inicio</li>
-            <li><a href="<?= WEB_ROOT ?>/users">Usuarios</a></li>
-            <li><a href="<?= WEB_ROOT ?>/categories">Categorías</a></li>
-            <li><a href="<?= WEB_ROOT ?>/tasks"></a>Tareas</li>
-        </ul>
-    </nav>
+<header class="bg-white/90 backdrop-blur shadow-md">
+    <div class="max-w-5xl mx-auto flex items-center justify-between py-4 px-4">
+
+        <div class="flex items-center space-x-3">
+            <img src="<?= WEB_ROOT ?>/imagen/img.png" 
+                 class="w-12 h-12" 
+                 alt="Logo TO-DOAHA">
+
+            <h1 class="text-2xl font-bold text-brandBrown tracking-wide">
+                TO-DOAHA
+            </h1>
+        </div>
+
+        <nav class="space-x-6 text-lg font-medium">
+            <a href="<?= WEB_ROOT ?>/" 
+               class="text-brandBrown hover:underline">Inicio</a>
+
+            <a href="<?= WEB_ROOT ?>/tasks" 
+               class="text-brandBrown hover:underline">Tareas</a>
+
+            <a href="<?= WEB_ROOT ?>/categories" 
+               class="text-brandBrown hover:underline">Categorías</a>
+
+            <a href="<?= WEB_ROOT ?>/users" 
+               class="text-brandBrown hover:underline">Usuarios</a>
+        </nav>
+    </div>
 </header>
