@@ -1,1 +1,75 @@
-<h1>Vista Edit</h1>
+<h2 class="text-3xl font-bold text-brandBrown mb-6">Editar tarea</h2>
+
+<div class="bg-white shadow rounded-xl p-8">
+
+    <form action="/tasks/update/<?= $task['id'] ?>" method="POST" class="space-y-5">
+
+        <div>
+            <label class="block text-brandBrown font-medium">Título</label>
+            <input type="text" name="title" value="<?= $task['title'] ?>"
+                   class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
+        </div>
+
+        <div>
+            <label class="block text-brandBrown font-medium">Descripción</label>
+            <textarea name="description"
+                      class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28"><?= $task['description'] ?></textarea>
+        </div>
+
+        <div>
+            <label class="block text-brandBrown font-medium">Estado</label>
+            <select name="status"
+                    class="w-full border border-brandBrown/40 rounded px-3 py-2">
+
+                <option value="pendiente"   <?= $task['status']=='pendiente'?'selected':'' ?>>Pendiente</option>
+                <option value="en_curso"    <?= $task['status']=='en_curso'?'selected':'' ?>>En curso</option>
+                <option value="terminada"   <?= $task['status']=='terminada'?'selected':'' ?>>Terminada</option>
+
+            </select>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-brandBrown font-medium">Inicio</label>
+                <input type="datetime-local" 
+                       name="start_time" 
+                       value="<?= $task['start_time'] ?>"
+                       class="w-full border border-brandBrown/40 rounded px-3 py-2">
+            </div>
+
+            <div>
+                <label class="block text-brandBrown font-medium">Fin</label>
+                <input type="datetime-local" 
+                       name="end_time" 
+                       value="<?= $task['end_time'] ?>"
+                       class="w-full border border-brandBrown/40 rounded px-3 py-2">
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-brandBrown font-medium">Categorías</label>
+            <select name="categories[]" multiple
+                    class="w-full border border-brandBrown/40 rounded px-3 py-2 h-24">
+                <?php foreach ($categories as $cat): ?>
+                    <option value="<?= $cat['id'] ?>"
+                        <?= in_array($cat['id'], $task['categories']) ? 'selected' : '' ?>>
+                        <?= $cat['name'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <button type="submit"
+                class="w-full bg-brandBrown text-white py-3 rounded-lg shadow hover:bg-brandBrown/90 transition">
+            Actualizar tarea
+        </button>
+
+    </form>
+
+    <p class="text-center mt-4">
+        <a href="<?= WEB_ROOT?>/tasks" class="text-brandBrown font-semibold underline">Volver</a>
+    </p>
+
+</div>
+
+

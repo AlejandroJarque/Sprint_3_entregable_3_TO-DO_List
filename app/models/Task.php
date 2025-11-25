@@ -3,7 +3,7 @@ class Task {
 private $file;
 
 public function __construct(){
-    $this->file = ROOT_PATH . 'app/data/tasks.json';
+    $this->file = ROOT_PATH . '/app/data/tasks.json';
 }
 
         private function load(){
@@ -35,12 +35,17 @@ public function __construct(){
             return null;
         }
 
-        public function insertTask(string $name, string $description){
+        public function insertTask(string $name, string $description,$status,$start,$end,$categories,$user){
             $tasks = $this->load();
             $id = empty($tasks) ? 1 : max(array_column($tasks,'id')) + 1;
             $newTask = ['id' => $id,
             'task_name' => $name,
             'task_description' => $description,
+            "status" => $status,
+            "start_time" => $start,
+            "end_time" => $end,
+            "categories" => $categories,
+            "user" => $user,
             'create_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')];
 
@@ -49,12 +54,19 @@ public function __construct(){
             return true;
         }
 
-        public function updateTask(int $id,string $name, string $description){
+        public function updateTask(int $id,string $name, string $description,$status,$start,$end,$categories,$user){
             $tasks = $this->load();
             foreach($tasks as $tas){
                 if($tas['id'] == $id){
                     $tas['tasks_name'] = $name;
                     $tas['tasks_description'] = $description;
+                    $tas['status'] = $status;
+                    $tas['start_time'] = $start;
+                    $tas['end_time'] = $end;
+                    $tas['categories'] = $categories;
+                    $tas['user'] = $user;
+
+
                     $tas['task_at'] = date('Y-m-d H:i:s');
                 }
             }

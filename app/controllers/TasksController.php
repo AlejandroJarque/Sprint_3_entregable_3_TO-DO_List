@@ -2,7 +2,7 @@
 class TasksController extends ApplicationController {
 
     public function indexAction(){
-       // $this->view->setLayout('main');
+       // $this->view->setLayout('layout');
        $tasksModel = new Task();
        $this->view->tasks = $tasksModel->getAll();
 
@@ -18,13 +18,18 @@ class TasksController extends ApplicationController {
         }
         $name = trim($_POST['tasks_name'] ?? '');
         $description = trim($_POST['tasks_description'] ?? '');
+        $status = trim($_POST['status'] ?? '');
+        $start = ($_POST['start_time'] ?? '');
+        $end = ($_POST['end_time'] ?? '');
+        $categories = ($_POST['categories'] ?? '');
+        $user = ($_POST['user'] ?? '');
 
         if($name === ''){
             header("Location: " . WEB_ROOT . "/tasks/create");
             exit;
         }
         $model = new Task();
-        $model ->insertTask($name,$description);
+        $model ->insertTask($name,$description,$status,$start,$end,$categories,$user);
 
         header("Location: " . WEB_ROOT . "/tasks");
         exit;
@@ -38,13 +43,19 @@ class TasksController extends ApplicationController {
         }
         $name = trim($_POST['tasks_name'] ?? '');
         $description = trim($_POST['tasks_description'] ?? '');
+        $status = trim($_POST['status'] ?? '');
+        $start = ($_POST['start_time'] ?? '');      
+        $end = ($_POST['end_time'] ?? '');
+        $categories = ($_POST['categories'] ?? '');
+        $user = ($_POST['user'] ?? '');
+    
 
         if($name === ''){
             header("Location: " . WEB_ROOT . "/tasks/edit/$id");
             exit;
         }
         $model = new Task();
-        $model ->updateTask($id,$name,$description);
+        $model ->updateTask($id,$name,$description,$status,$start,$end,$categories,$user);
 
         header("Location: " . WEB_ROOT . "/tasks");
         exit;
