@@ -24,23 +24,28 @@
         <tbody>
             <?php foreach($this->tasks as $tas): ?>
                 <tr class="border-b hover:bg-brandBeige/30 transition">
-                    <td class="p-3"><?= htmlspecialchars($tas->task_name) ?>
+                    <td class="p-3"><?= htmlspecialchars($tas->task_name) ?></td>
                     <td class="p-3"><?= htmlspecialchars($tas->task_description) ?></td>
                     <td class="p-3"><?= htmlspecialchars($tas->status) ?></td>
                     <td class="p-3"><?= htmlspecialchars($tas->start_time) ?></td>
                     <td class="p-3"><?= htmlspecialchars($tas->end_time) ?></td>
                     <td class="p-3"><?= htmlspecialchars($tas->user) ?></td>
-                    <td class="p-3"><?= implode(', ', $task->categories) ?></td>
+
+                    <td class="p-3">
+                        <?= is_array($tas->categories) ? implode(', ', $tas->categories) : '' ?>
+                    </td>
+
                     <td class="p-3 text-center space-x-2">
-                        <a href="/tasks/show/<?= $task['id'] ?>" class="text-blue-600 font-semibold hover:underline">Ver</a>
-                        <a href="/tasks/edit/<?= $task['id'] ?>" class="text-green-600 font-semibold hover:underline">Editar</a>
-                        <a href="/tasks/delete/<?= $task['id'] ?>" class="text-red-600 font-semibold hover:underline">Borrar</a>
+                        <a href="/tasks/show/<?= $tas->id ?>" class="text-blue-600 font-semibold hover:underline">Ver</a>
+                        <a href="/tasks/edit/<?= $tas->id ?>" class="text-green-600 font-semibold hover:underline">Editar</a>
+                        <a href="/tasks/delete/<?= $tas->id ?>" class="text-red-600 font-semibold hover:underline">Borrar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
+
 
 
 
