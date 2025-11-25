@@ -4,8 +4,45 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gestor de Tareas</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        beige: {
+                            50: "#faf7f2",
+                            100: "#f3ebdf",
+                            200: "#e9dcc6",
+                            300: "#dfccac",
+                            400: "#d2b78d",
+                            500: "#c4a16f"
+                        },
+                        brown: {
+                            800: "#5a4631",
+                            900: "#3b2f22"
+                        },
+                        brandBrown: "#6d5239",
+                        brandBeige: "#e7dbc4"
+                    }
+                }
+            }
+        }
+    </script>
+
 </head>
-<body>
-	<?php echo $this->content(); ?>
+<body class="bg-brandBeige min-h-screen flex flex-col">
+
+    <?php include(ROOT_PATH . '/app/views/common/header.phtml'); ?>
+
+    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-8">
+        <?= $this->content(); ?>
+    </main>
+
+    <?php include(ROOT_PATH . '/app/views/common/footer.phtml'); ?>
+
 </body>
 </html>

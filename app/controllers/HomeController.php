@@ -4,7 +4,7 @@ class HomeController extends ApplicationController {
 
     public function indexAction() {
 
-        $this->view->setLayout('main');
+        $this->view->setLayout('layout');
     }
 }
 ?>

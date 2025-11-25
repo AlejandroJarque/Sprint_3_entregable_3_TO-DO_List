@@ -4,7 +4,7 @@ class CategoriesController extends ApplicationController {
 
     public function indexAction() {
 
-        $this->view->setLayout('main');
+        $this->view->setLayout('layout');
         $categoryModel = new Category();
         $this->view->categories = $categoryModel->getAll();
     }
