@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "category_name": "Nueva Categoria",
+        "category_description": "Esta es la primera categor\u00eda",
+        "created_at": "2025-11-20 20:32:19",
+        "updated_at": "2025-11-20 20:32:19"
+    },
+    {
+        "id": 2,
+        "category_name": "Esta es otra categoria",
+        "category_description": "Hola categor\u00eda",
+        "created_at": "2025-11-21 18:04:00",
+        "updated_at": "2025-11-21 18:04:00"
+    },
+    {
+        "id": 3,
+        "category_name": "Esta es otra prueba",
+        "category_description": "Ultima categor\u00eda",
+        "created_at": "2025-11-21 18:04:13",
+        "updated_at": "2025-11-21 18:04:30"
+    }
+]
