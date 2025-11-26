@@ -14,4 +14,9 @@ $routes = array(
 	'/users/login' => 'users#login',
 	'/users/register' => 'users#register',
 	'/users/profile' => 'users#profile',
+	'/users/update' => 'users#update',
+	'/users/delete' => 'users#delete',
+	'/users/create' => 'users#create',
+	'/users/index' => 'users#index',
+	'/users/logout' => 'users#logout'
 );

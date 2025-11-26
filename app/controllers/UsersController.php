@@ -116,37 +116,47 @@ class UsersController extends ApplicationController {
     }
     
     public function registerAction() {
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return;
+        }
 
-            require_once __DIR__ . '/../models/User.php';
-            $user = new User();
+        $name = trim($_POST['user_name'] ?? '');
+        $surname = trim($_POST['user_surname'] ?? '');
+        $username = trim($_POST['user_username'] ?? '');
+        $email = trim($_POST['user_email'] ?? '');
+        $password = trim($_POST['user_password'] ?? '');
 
-            $user->insertUser(
-                $_POST['user_name'],
-                $_POST['user_surname'],
-                $_POST['user_username'],
-                $_POST['user_email'],
-                $_POST['user_password']
-            );
-
-            header("Location: " . WEB_ROOT . "/users/profile");
+        if ($name === '' || $surname === '' || $username === '' || $email === '' || $password === '') {
+            header("Location: " . WEB_ROOT . "/users/register");
             exit;
         }
+
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+        $model = new User();
+        $model->insertUser($name, $surname, $username, $email, $passwordHash);
+
+        session_start();
+        $_SESSION['user_username'] = $username;
+
+        header("Location: " . WEB_ROOT . "/users/profile");
+        exit;
     }
 
     public function profileAction() {
-        $this->view->setLayout('main');
+        $this->view->setLayout('layout'); //'main'
 
         $userModel = new User();
         $this->view->users = $userModel->getAll();
-        
-        /*session_start();
-        if(!isset($_SESSION['user'])) {
-            header("Location: " . WEB_ROOT . "/users/login");
-            exit;
-        }
+    }
 
-        $user = $_SESSION['user'];
-        $this->view->user = $user;*/
+    public function logoutAction() {
+        session_start();
+
+        $_SESSION = [];
+        session_destroy();
+
+        header("Location: " . WEB_ROOT . "/users/login");
+        exit;
     }
 }
