@@ -33,4 +33,3 @@ $routes['/users/delete'] = 'users#delete';
 $routes['/users/create'] = 'users#create';
 $routes['/users/index'] = 'users#index';
 $routes['/users/logout'] = 'users#logout';
-
