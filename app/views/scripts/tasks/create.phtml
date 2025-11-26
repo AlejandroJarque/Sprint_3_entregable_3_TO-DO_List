@@ -1,0 +1,68 @@
+<h2 class="text-3xl font-bold text-brandBrown mb-6">Crear nueva tarea</h2>
+
+<div class="bg-white shadow rounded-xl p-8">
+
+  <form action="<?= WEB_ROOT ?>/tasks/store" method="POST" class="space-y-5">
+
+        <div>
+            <label class="block text-brandBrown font-medium">Título</label>
+            <input type="text" name="task_name"
+                   class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40"
+                   required>
+        </div>
+
+        <div>
+            <label class="block text-brandBrown font-medium">Descripción</label>
+            <textarea name="task_description"
+                   class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28 focus:ring-brandBrown/40"></textarea>
+        </div>
+
+        <div>
+            <label class="block text-brandBrown font-medium">Estado</label>
+            <select name="status"
+                    class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
+                <option value="pendiente">Pendiente</option>
+                <option value="en_curso">En curso</option>
+                <option value="terminada">Terminada</option>
+            </select>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-brandBrown font-medium">Inicio</label>
+                <input type="datetime-local" name="start_time"
+                       class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
+            </div>
+
+            <div>
+                <label class="block text-brandBrown font-medium">Fin</label>
+                <input type="datetime-local" name="end_time"
+                       class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-brandBrown font-medium">Categorías</label>
+            <select name="categories[]" multiple
+                    class="w-full border border-brandBrown/40 rounded px-3 py-2 h-24 focus:ring-brandBrown/40">
+                <?php foreach ($categories as $cat): ?>
+                    <option value="<?= $cat['id'] ?>"><?= $cat['name'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+       <button type="submit"
+        class="w-full bg-brandBrown text-white py-3 rounded-lg shadow hover:bg-brandBrown/90 transition">
+              Guardar tarea
+        </button>
+
+    </form>
+
+    <p class="text-center mt-4">
+        <a href="<?= WEB_ROOT?>/tasks/index" class="text-brandBrown font-semibold underline">Volver</a>
+    </p>
+
+</div>
+
+
+

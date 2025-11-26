@@ -1,0 +1,55 @@
+
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-bold text-brandBrown">Listado de tareas</h2>
+
+    <a href="<?= WEB_ROOT ?>/tasks/create"
+       class="bg-brandBrown text-white px-4 py-2 rounded-lg shadow hover:bg-brandBrown/90 transition">
+        + Crear nueva tarea
+    </a>
+</div>
+
+<div class="overflow-x-auto bg-white shadow rounded-lg">
+    <table class="w-full text-left border-collapse">
+        <thead class="bg-brandBrown text-white">
+            <tr>
+                <th class="p-3">Título</th>
+                <th class="p-3">Desripción</th>
+                <th class="p-3">Estado</th>
+                <th class="p-3">Inicio</th>
+                <th class="p-3">Fin</th>
+                <th class="p-3">Usuario</th>
+                <th class="p-3">Categoria</th>
+                <th class="p-3 text-center">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach($this->tasks as $tas): ?>
+                <tr class="border-b hover:bg-brandBeige/30 transition">
+                    <td class="p-3"><?= htmlspecialchars($tas->task_name) ?></td>
+                    <td class="p-3"><?= htmlspecialchars($tas->task_description) ?></td>
+                    <td class="p-3"><?= htmlspecialchars($tas->status) ?></td>
+                    <td class="p-3"><?= htmlspecialchars($tas->start_time) ?></td>
+                    <td class="p-3"><?= htmlspecialchars($tas->end_time) ?></td>
+                    <td class="p-3"><?= htmlspecialchars($tas->user) ?></td>
+
+                    <td class="p-3">
+                        <?= is_array($tas->categories) ? implode(', ', $tas->categories) : '' ?>
+                    </td>
+
+                    <td class="p-3 text-center space-x-2">
+                        <a href="<?= WEB_ROOT ?>/tasks/edit/<?= $tas->id ?>" class="text-green-600 font-semibold hover:underline">✏️Editar</a>
+                        <a href="<?= WEB_ROOT ?>/tasks/delete/<?= $tas->id ?>" class="text-red-600 font-semibold hover:underline">🗑️Borrar</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
