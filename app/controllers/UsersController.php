@@ -135,12 +135,16 @@ class UsersController extends ApplicationController {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         $model = new User();
-        $model->insertUser($name, $surname, $username, $email, $passwordHash);
+        $userId = $model->insertUser($name, $surname, $username, $email, $passwordHash);
 
-        session_start();
+        if (session_start() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $_SESSION['user_id'] = $userId;
         $_SESSION['user_username'] = $username;
 
-        header("Location: " . WEB_ROOT . "/users/profile");
+        header("Location: " . WEB_ROOT . "/users/index");
         exit;
     }
 
