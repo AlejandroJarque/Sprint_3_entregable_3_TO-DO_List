@@ -1,0 +1,45 @@
+<div class="max-w-md mx-auto bg-white rounded-x1 shadow p-8">
+
+    <h2 class="text-3x1 font-semibold text-brandBrown text-center mb-6">
+        User Profile
+    </h2>
+
+    <?php if(!empty($user)): ?>
+        <div class="space-y-3 text-brandBrown">
+
+            <p>
+                <span class="font-semibold">Name: </span>
+                <?=  htmlspecialchars($user['user_name']) ?>
+            </p>
+
+            <p>
+                <span class="font-semibold">Surname: </span>
+                <?=  htmlspecialchars($user['user_surname']) ?>
+            </p>
+
+            <p>
+                <span class="font-semibold">Username: </span>
+                <?=  htmlspecialchars($user['user_username']) ?>
+            </p>
+
+            <p>
+                <span class="font-semibold">Email: </span>
+                <?=  htmlspecialchars($user['user_email']) ?>
+            </p>
+        </div>
+    <?php else: ?>
+
+        <p class="text-red-600 text-center">
+            User session not found.
+        </p>
+
+    <?php endif; ?>
+
+    <div class="mt-6 text-center">
+        <a href="<?=  WEB_ROOT ?>/users/logout"
+            class="inline-block bg-brandBrown text-white px-4 py-2 rounded-lg shadow hover:bg-brandBrown/90 transition">
+                Log out
+        </a>
+    </div>
+    
+</div>
