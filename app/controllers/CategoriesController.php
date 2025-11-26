@@ -11,6 +11,8 @@ class CategoriesController extends ApplicationController {
 
     public function createAction() {
 
+        /*$catModel = new Category();
+        $this->view->categories = $catModel->getAll();*/
     }
 
     public function storeAction() {
