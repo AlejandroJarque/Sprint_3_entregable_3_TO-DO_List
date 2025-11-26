@@ -3,6 +3,7 @@ class UsersController extends ApplicationController {
     public function indexAction() {
         $userModel = new User();
         $this->view->users = $userModel->getAll();
+
     }
     public function createAction() {
 
