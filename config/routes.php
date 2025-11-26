@@ -1,6 +1,6 @@
 <?php 
 
-$routes = array();
+$routes = array(
 	'/test' => 'test#index'
 );
 
@@ -25,12 +25,12 @@ $routes['/categories/edit/:id'] = 'Categories#edit';
 $routes['/categories/update/:id'] = 'Categories#update';
 $routes['/categories/delete/:id'] = 'Categories#delete';
 
-$routes['/users/login'] => 'users#login',
-$routes['/users/register'] => 'users#register',
-$routes['/users/profile'] => 'users#profile',
-$routes['/users/update'] => 'users#update',
-$routes['/users/delete'] => 'users#delete',
-$routes['/users/create'] => 'users#create',
-$routes['/users/index'] => 'users#index',
-$routes['/users/logout'] => 'users#logout'
+$routes['/users/login'] = 'users#login';
+$routes['/users/register'] = 'users#register';
+$routes['/users/profile'] = 'users#profile';
+$routes['/users/update'] = 'users#update';
+$routes['/users/delete'] = 'users#delete';
+$routes['/users/create'] = 'users#create';
+$routes['/users/index'] = 'users#index';
+$routes['/users/logout'] = 'users#logout';
 
