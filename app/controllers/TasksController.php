@@ -2,6 +2,7 @@
 class TasksController extends ApplicationController {
 
     public function indexAction() {
+
         $this->view->setLayout('layout');
         $tasksModel = new Task();
         $this->view->tasks = $tasksModel->getAll();
@@ -12,10 +13,10 @@ class TasksController extends ApplicationController {
     }
 
     public function storeAction() {
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             throw new Exception('Metodo no permitido');
         }
-
 
         $name = trim($_POST['task_name'] ?? '');
         $description = trim($_POST['task_description'] ?? '');
@@ -81,6 +82,7 @@ class TasksController extends ApplicationController {
     }
 
     public function editAction() {
+
         $id = $this->_getParam('id');
 
         if (!$id) {
@@ -93,6 +95,9 @@ class TasksController extends ApplicationController {
         if (!$task) {
             throw new Exception("Tarea no encontrada");
         }
+
+        $catModel = new Category();
+        $this->view->categories = $catModel->getAll();
 
         $this->view->task = $task;
     }
