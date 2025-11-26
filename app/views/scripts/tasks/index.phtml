@@ -14,6 +14,7 @@
             <tr>
                 <th class="p-3">Título</th>
                 <th class="p-3">Desripción</th>
+
                 <th class="p-3">Estado</th>
                 <th class="p-3">Inicio</th>
                 <th class="p-3">Fin</th>
@@ -32,6 +33,7 @@
                     <td class="p-3"><?= htmlspecialchars($tas->start_time) ?></td>
                     <td class="p-3"><?= htmlspecialchars($tas->end_time) ?></td>
                     <td class="p-3"><?= htmlspecialchars($tas->user) ?></td>
+
                     <td class="p-3">
                         <?= is_array($tas->categories) ? implode(', ', $tas->categories) : '' ?>
                     </td>

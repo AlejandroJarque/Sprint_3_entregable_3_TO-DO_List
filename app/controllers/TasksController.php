@@ -96,8 +96,8 @@ class TasksController extends ApplicationController {
             throw new Exception("Tarea no encontrada");
         }
 
-        $catModel = new Category();
-        $this->view->categories = $catModel->getAll();
+        /*$catModel = new Category();
+        $this->view->categories = $catModel->getAll();*/
 
         $this->view->task = $task;
     }

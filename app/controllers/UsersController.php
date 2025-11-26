@@ -1,11 +1,20 @@
 <?php
 class UsersController extends ApplicationController {
     public function indexAction() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $userId = $_SESSION['user_id'] ?? null;
+        
         $userModel = new User();
-        $this->view->users = $userModel->getAll();
-    }
-    public function createAction() {
+        //$this->view->users = $userModel->getAll();
 
+        if ($userId) {
+            $userModel = new User();
+            $this->view->user = $userModel->getById($userId);
+        } else {
+            $this->view->user = null;
+        }
     }
     public function storeAction() {
         if($_SERVER['REQUEST_METHOD']!=='POST') {
@@ -84,6 +93,10 @@ class UsersController extends ApplicationController {
     }
 
     public function loginAction() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $username = trim($_POST['user_username'] ?? '');
@@ -116,8 +129,10 @@ class UsersController extends ApplicationController {
     }
     
     public function registerAction() {
-        if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return;
+        if($_SERVER['REQUEST_METHOD'] !== 'POST') return;
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
 
         $name = trim($_POST['user_name'] ?? '');
@@ -134,9 +149,14 @@ class UsersController extends ApplicationController {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         $model = new User();
-        $model->insertUser($name, $surname, $username, $email, $passwordHash);
+        $userId = $model->insertUser($name, $surname, $username, $email, $passwordHash);
 
-        session_start();
+        if(!$userId) {
+            header("Location: " . WEB_ROOT . "/users/register");
+            exit;
+        }
+
+        $_SESSION['user_id'] = $userId;
         $_SESSION['user_username'] = $username;
 
         header("Location: " . WEB_ROOT . "/users/profile");
@@ -146,12 +166,23 @@ class UsersController extends ApplicationController {
     public function profileAction() {
         $this->view->setLayout('layout'); //'main'
 
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $userId = $_SESSION['user_id'] ?? null;
         $userModel = new User();
-        $this->view->users = $userModel->getAll();
+        
+        if($userId) {
+            $this->view->user = $userModel->getById($userId);
+        } else {
+            $this->view->user = null;
+        }
     }
 
     public function logoutAction() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         $_SESSION = [];
         session_destroy();

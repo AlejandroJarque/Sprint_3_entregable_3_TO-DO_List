@@ -36,7 +36,7 @@ class User {
         $users = $this->load();
 
         foreach($users as $user){
-            if($user['id']==$id){
+            if($user['id']===$id){
                 return(object)$user;
             }
         }
@@ -69,7 +69,8 @@ class User {
 
         $users[]=$newUser;
         $this->save($users);
-        return true;
+
+        return $id;
     }
 
 
