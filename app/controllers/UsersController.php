@@ -1,9 +1,19 @@
 <?php
 class UsersController extends ApplicationController {
     public function indexAction() {
+        if (session_start() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $userId = $_SESSION['user_id'] ?? null;
+        
         $userModel = new User();
         $this->view->users = $userModel->getAll();
 
+        if ($userId) {
+            $this->view->user = $userModel->getById($userId);
+        } else {
+            $this->view->user = null;
+        }
     }
     public function createAction() {
 
