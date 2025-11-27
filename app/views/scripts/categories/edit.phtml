@@ -1,5 +1,5 @@
 
-<h2 class="text-3xl font-bold text-brandBrown mb-6">Editar categoría</h2>
+<h2 class="text-3xl font-bold text-brandBrown mb-6">Edit category</h2>
 
 <div class="bg-white shadow rounded-xl p-8">
 
@@ -9,7 +9,7 @@
 
 
         <div>
-            <label class="block text-brandBrown font-medium">Nombre</label>
+            <label class="block text-brandBrown font-medium">Name</label>
             <input type="text" 
                    name="category_name" 
                    value="<?= htmlspecialchars($this->category->category_name) ?>"
@@ -19,7 +19,7 @@
 
 
         <div>
-            <label class="block text-brandBrown font-medium">Descripción</label>
+            <label class="block text-brandBrown font-medium">Description</label>
             <textarea name="category_description"
                       class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28 focus:ring-brandBrown/40"><?= htmlspecialchars($this->category->category_description) ?></textarea>
         </div>
@@ -27,7 +27,7 @@
 
         <button type="submit"
                 class="w-full bg-brandBrown text-white py-3 rounded-lg shadow hover:bg-brandBrown/90 transition">
-            Actualizar categoría
+            Update category
         </button>
 
     </form>
@@ -35,7 +35,7 @@
     <p class="text-center mt-4">
         <a href="<?= WEB_ROOT ?>/categories" 
            class="text-brandBrown font-semibold underline">
-            Volver
+            Back
         </a>
     </p>
 

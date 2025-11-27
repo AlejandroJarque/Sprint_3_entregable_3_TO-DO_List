@@ -1,37 +1,37 @@
 
-<h2 class="text-3xl font-bold text-brandBrown mb-6">Editar tarea</h2>
+<h2 class="text-3xl font-bold text-brandBrown mb-6">Edit task</h2>
 
 <div class="bg-white shadow rounded-xl p-8">
 
     <form action="<?= WEB_ROOT ?>/tasks/update/<?= $this->task->id ?>" method="POST" class="space-y-5">
 
         <div>
-            <label class="block text-brandBrown font-medium">Título</label>
+            <label class="block text-brandBrown font-medium">Title</label>
             <input type="text" name="task_name" value="<?= $this->task->task_name ?>"
                    class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
         </div>
 
         <div>
-            <label class="block text-brandBrown font-medium">Descripción</label>
+            <label class="block text-brandBrown font-medium">Description</label>
             <textarea name="task_description"
                       class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28"><?= $this->task->task_description ?></textarea>
         </div>
 
         <div>
-            <label class="block text-brandBrown font-medium">Estado</label>
+            <label class="block text-brandBrown font-medium">Estatus</label>
             <select name="status"
                     class="w-full border border-brandBrown/40 rounded px-3 py-2">
 
-                <option value="pendiente"<?= $this->task->status == 'pendiente' ? 'selected' : '' ?>>Pendiente</option>
-                <option value="en_curso"<?= $this->task->status == 'en_curso' ? 'selected' : '' ?>>En curso</option>
-                <option value="terminada"<?= $this->task->status == 'terminada' ? 'selected' : '' ?>>Terminada</option>
+                <option value="pendiente"<?= $this->task->status == 'pendiente' ? 'selected' : '' ?>>Pending</option>
+                <option value="en_curso"<?= $this->task->status == 'en_curso' ? 'selected' : '' ?>>In pogress</option>
+                <option value="terminada"<?= $this->task->status == 'terminada' ? 'selected' : '' ?>>Finished</option>
 
             </select>
         </div>
 
         <div class="grid md:grid-cols-2 gap-4">
             <div>
-                <label class="block text-brandBrown font-medium">Inicio</label>
+                <label class="block text-brandBrown font-medium">Index</label>
                 <input type="datetime-local"
                        name="start_time"
                        value="<?= $this->task->start_time ?>"
@@ -48,6 +48,9 @@
         </div>
 
         <div>
+            <label class="block text-brandBrown font-medium">Categories</label>
+            <select name="categories[]" multiple
+
             <label class="block text-brandBrown font-medium">Categorías</label>
             <select name="categories"
                     class="w-full border border-brandBrown/40 rounded px-3 py-2 h-24">
@@ -60,7 +63,7 @@
 
         <button type="submit"
                 class="w-full bg-brandBrown text-white py-3 rounded-lg shadow hover:bg-brandBrown/90 transition">
-            Actualizar tarea
+            Update task
         </button>
 
     </form>

@@ -1,9 +1,12 @@
 
+
+<h2 class="text-3xl font-bold text-brandBrown mb-6">Categories List</h2>
+
 <div class="flex justify-between items-center mb-6">
     <h2 class="text-3xl font-bold text-brandBrown mb-6">Listado de categorías</h2>
     <a href="<?= WEB_ROOT ?>/categories/create"
        class="bg-brandBrown text-white px-4 py-2 rounded-lg shadow hover:bg-brandBrown/90 transition">
-        + Crear categoría
+        + Create category
     </a>
 </div>
 
@@ -12,9 +15,9 @@
         <thead class="bg-brandBrown text-white">
             <tr>
                 <th class="p-3">ID</th>
-                <th class="p-3">Nombre</th>
-                <th class="p-3">Descripción</th>
-                <th class="p-3 text-center">Acciones</th>
+                <th class="p-3">Name</th>
+                <th class="p-3">Description</th>
+                <th class="p-3 text-center">Actions</th>
             </tr>
         </thead>
 
@@ -31,18 +34,18 @@
 
                         <a href="<?= WEB_ROOT ?>/categories/edit/<?= $c->id ?>"
                            class="text-green-700 font-semibold hover:underline">
-                            ✏️ Editar
+                            ✏️ Edit
                         </a>
 
 
                         <form action="<?= WEB_ROOT ?>/categories/delete/<?= $c->id ?>" 
                               method="POST" 
                               class="inline"
-                              onsubmit="return confirm('¿Seguro que deseas borrar esta categoría?');">
+                              onsubmit="return confirm('Are you sure you want to delete this category?');">
 
                             <button type="submit"
                                     class="text-red-600 font-semibold hover:underline">
-                                🗑️ Borrar
+                                🗑️ Delete
                             </button>
 
                         </form>

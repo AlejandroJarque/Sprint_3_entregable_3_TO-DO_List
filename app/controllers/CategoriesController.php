@@ -16,7 +16,7 @@ class CategoriesController extends ApplicationController {
     public function storeAction() {
 
         if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            throw new Exception("Metodo no permitido");
+            throw new Exception("Method not allowed");
         }
 
         $name = trim($_POST['category_name'] ?? '');
@@ -40,14 +40,14 @@ class CategoriesController extends ApplicationController {
         $id = $this -> _getParam('id');
 
         if(!$id) {
-            throw new Exception("ID no proporcionado");
+            throw new Exception("ID not provided");
         }
 
         $categoryModel = new Category();
         $category = $categoryModel -> getById($id);
 
         if(!$category) {
-            throw new Exception("Categoria no encontrada");
+            throw new Exception("Category not found");
             
         }
 
@@ -59,7 +59,7 @@ class CategoriesController extends ApplicationController {
         $id = $this->_getParam('id');
 
         if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            throw new Exception("Metodo no permitido");
+            throw new Exception("Method not allowed");
             
         }
 
@@ -83,7 +83,7 @@ class CategoriesController extends ApplicationController {
         $id = $this->_getParam('id');
 
         if(!$id) {
-            throw new Exception("ID no proporcionado");
+            throw new Exception("ID not provided");
         }
 
         $model = new Category();
