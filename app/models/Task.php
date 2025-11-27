@@ -7,6 +7,7 @@ class Task {
     }
 
     private function load() {
+
         if (!file_exists($this->file)) {
             return [];
         }
@@ -19,17 +20,22 @@ class Task {
     }
 
     public function getAll() {
+
         $tasks = $this->load();
+
         usort($tasks, function ($a, $b) {
             return $b['id'] <=> $a['id'];
         });
+
         return array_map(function ($tas) {
             return (object) $tas;
         }, $tasks);
     }
 
     public function getById(int $id) {
+
         $tasks = $this->load();
+
         foreach ($tasks as $tas) {
             if ($tas['id'] == $id) {
                 return (object) $tas;
@@ -38,7 +44,7 @@ class Task {
         return null;
     }
 
-    public function insertTask(string $name, string $description, $status, $start, $end, $categories, $user) {
+    public function insertTask(string $name, string $description, $status, $start, $end, $categories, $userId) {
         $tasks = $this->load();
         $id = empty($tasks) ? 1 : max(array_column($tasks, 'id')) + 1;
 
@@ -50,8 +56,8 @@ class Task {
             'start_time' => $start,
             'end_time' => $end,
             'categories' => is_array($categories) ? $categories : [],
-            'user' => $user,
-            'create_at' => date('Y-m-d H:i:s'),
+            'user_id' => $userId,
+            'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
@@ -60,7 +66,8 @@ class Task {
         return true;
     }
 
-    public function updateTask(int $id,string $name,string $description, $status, $start, $end, $categories, $user) {
+    public function updateTask(int $id,string $name,string $description, $status, $start, $end, $categories, $userId) {
+
         $tasks = $this->load();
 
         foreach ($tasks as &$tas) {
@@ -72,7 +79,7 @@ class Task {
                 $tas['start_time'] = $start;
                 $tas['end_time'] = $end;
                 $tas['categories'] = is_array($categories) ? $categories : [];
-                $tas['user'] = $user;
+                $tas['user'] = $userId;
                 $tas['updated_at'] = date('Y-m-d H:i:s');
                 break;
             }
