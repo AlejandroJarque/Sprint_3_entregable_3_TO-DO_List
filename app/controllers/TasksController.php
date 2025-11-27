@@ -1,8 +1,21 @@
 <?php
 class TasksController extends ApplicationController {
 
+    public function requireLogin() {
+
+        if(session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if(!isset($_SESSION['user_id'])) {
+            header("Location: ".WEB_ROOT."/users/login");
+            exit;
+        }
+    }
+
     public function indexAction() {
 
+        $this->requireLogin();
         $this->view->setLayout('layout');
         $tasksModel = new Task();
         $this->view->tasks = $tasksModel->getAll();
@@ -10,9 +23,13 @@ class TasksController extends ApplicationController {
 
     public function createAction() {
 
+        $this->requireLogin();
+        $this->view->setLayout('layout');
     }
 
     public function storeAction() {
+
+        $this->requireLogin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             throw new Exception('Method not allowed');
@@ -39,6 +56,9 @@ class TasksController extends ApplicationController {
     }
 
     public function updateAction() {
+
+        $this->requireLogin();
+
         $id = $this->_getParam('id');
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -50,8 +70,6 @@ class TasksController extends ApplicationController {
         $status = trim($_POST['status'] ?? '');
         $start = ($_POST['start_time'] ?? '');
         $end = ($_POST['end_time'] ?? '');
-
-
         $categories = $_POST['categories'] ?? [];
         $user = ($_POST['user'] ?? '');
 
@@ -68,6 +86,9 @@ class TasksController extends ApplicationController {
     }
 
     public function deleteAction() {
+
+        $this->requireLogin();
+        
         $id = $this->_getParam('id');
 
         if (!$id) {
@@ -83,6 +104,8 @@ class TasksController extends ApplicationController {
 
     public function editAction() {
 
+        $this->requireLogin();
+
         $id = $this->_getParam('id');
 
         if (!$id) {
@@ -97,6 +120,7 @@ class TasksController extends ApplicationController {
         }
 
         $this->view->task = $task;
+        $this->view->setLayout('layout');
     }
 }
 ?>
