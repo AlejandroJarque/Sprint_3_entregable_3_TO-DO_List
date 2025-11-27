@@ -6,5 +6,10 @@
  */
 class ApplicationController extends Controller 
 {
-	
+	public function init() {
+        if (session_status() === PHP_SESSION_NONE) {
+            @session_start();
+        }
+        parent::init();
+    }
 }

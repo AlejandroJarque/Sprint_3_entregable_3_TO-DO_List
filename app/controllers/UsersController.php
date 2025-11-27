@@ -94,7 +94,7 @@ class UsersController extends ApplicationController {
 
     public function loginAction() {
         if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+            @session_start();
         }
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -129,9 +129,10 @@ class UsersController extends ApplicationController {
     }
     
     public function registerAction() {
+        if (session_status() === PHP_SESSION_NONE) {
+            @session_start();
+        }
         if($_SERVER['REQUEST_METHOD'] !== 'POST') return;
-
-        session_start();
 
         $name = trim($_POST['user_name'] ?? '');
         $surname = trim($_POST['user_surname'] ?? '');
