@@ -3,29 +3,27 @@
 
 <div class="bg-white shadow rounded-xl p-8">
 
-    <form action="<?= WEB_ROOT ?>/tasks/update/<?= $this->task->id ?>" method="POST" class="space-y-5">
+    <form action="<?= WEB_ROOT ?>/tasks/store/<?= $this->task->id ?>" method="POST" class="space-y-5">
 
         <div>
             <label class="block text-brandBrown font-medium">Title</label>
-            <input type="text" name="task_name" value="<?= $this->task->task_name ?>"
+            <input type="text" name="task_name" 
                    class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
         </div>
 
         <div>
             <label class="block text-brandBrown font-medium">Description</label>
             <textarea name="task_description"
-                      class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28"><?= $this->task->task_description ?></textarea>
+                      class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28"></textarea>
         </div>
 
         <div>
-            <label class="block text-brandBrown font-medium">Estatus</label>
+            <label class="block text-brandBrown font-medium">Status</label>
             <select name="status"
                     class="w-full border border-brandBrown/40 rounded px-3 py-2">
-
-                <option value="pendiente"<?= $this->task->status == 'pendiente' ? 'selected' : '' ?>>Pending</option>
-                <option value="en_curso"<?= $this->task->status == 'en_curso' ? 'selected' : '' ?>>In pogress</option>
-                <option value="terminada"<?= $this->task->status == 'terminada' ? 'selected' : '' ?>>Finished</option>
-
+                <option value="pendiente">Pending</option>
+                <option value="en_curso">In pogress</option>
+                <option value="terminada">Finished</option>
             </select>
         </div>
 
@@ -34,7 +32,6 @@
                 <label class="block text-brandBrown font-medium">Index</label>
                 <input type="datetime-local"
                        name="start_time"
-                       value="<?= $this->task->start_time ?>"
                        class="w-full border border-brandBrown/40 rounded px-3 py-2">
             </div>
 
@@ -42,7 +39,6 @@
                 <label class="block text-brandBrown font-medium">Fin</label>
                 <input type="datetime-local"
                        name="end_time"
-                       value="<?= $this->task->end_time ?>"
                        class="w-full border border-brandBrown/40 rounded px-3 py-2">
             </div>
         </div>
@@ -50,26 +46,24 @@
         <div>
             <label class="block text-brandBrown font-medium">Categories</label>
             <select name="categories[]" multiple
-
-            <label class="block text-brandBrown font-medium">Categorías</label>
-            <select name="categories"
                     class="w-full border border-brandBrown/40 rounded px-3 py-2 h-24">
-                        <option value="personal">Personal</option>
-                        <option value="trabajo">Trabajo</option>
-                        <option value="estudio">Estudios</option>
-                        <option value="urgente">Urgente</option>
+                        <?php foreach($this->categories as $cat):?>
+                            <option value="<?= $cat->id ?>">
+                                <?= htmlspecialchars($cat->category_name) ?>
+                            </option>
+                        <?php endforeach; ?>
             </select>
         </div>
 
         <button type="submit"
                 class="w-full bg-brandBrown text-white py-3 rounded-lg shadow hover:bg-brandBrown/90 transition">
-            Update task
+            Save task
         </button>
 
     </form>
 
     <p class="text-center mt-4">
-        <a href="<?= WEB_ROOT ?>/tasks" class="text-brandBrown font-semibold underline">Volver</a>
+        <a href="<?= WEB_ROOT ?>/tasks" class="text-brandBrown font-semibold underline">Back</a>
     </p>
 
 </div>
