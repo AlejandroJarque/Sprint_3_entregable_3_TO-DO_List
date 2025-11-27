@@ -44,15 +44,13 @@
         <div>
 
             <label class="block text-brandBrown font-medium">Categories</label>
-            <select name="categories[]" multiple>
-            <label class="block text-brandBrown font-medium">Categorías</label>
-            <select name="categories"
-
+            <select name="categories[]" multiple
                     class="w-full border border-brandBrown/40 rounded px-3 py-2 h-24 focus:ring-brandBrown/40">
-                        <option value="personal">Personal</option>
-                        <option value="trabajo">Trabajo</option>
-                        <option value="estudio">Estudios</option>
-                        <option value="urgente">Urgente</option>
+                        <?php foreach($this->categories as $cat): ?>
+                            <option value="<?= $cat->id ?>">
+                                <?= htmlspecialchars($cat->category_name) ?>
+                            </option>
+                        <?php endforeach; ?>
             </select>
         </div>
 
