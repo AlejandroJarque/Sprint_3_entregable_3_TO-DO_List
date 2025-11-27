@@ -49,16 +49,12 @@
 
         <div>
             <label class="block text-brandBrown font-medium">Categorías</label>
-            <select name="categories[]" multiple
+            <select name="categories"
                     class="w-full border border-brandBrown/40 rounded px-3 py-2 h-24">
-
-                <?php foreach ($this->categories as $cat): ?>
-                    <option value="<?= $cat['id'] ?>"
-                        <?= in_array($cat['id'], $this->task->categories ?? []) ? 'selected' : '' ?>>
-                        <?= $cat['name'] ?>
-                    </option>
-                <?php endforeach; ?>
-
+                        <option value="personal">Personal</option>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="estudio">Estudios</option>
+                        <option value="urgente">Urgente</option>
             </select>
         </div>
 
