@@ -1,138 +1,88 @@
 <?php
 class UsersController extends ApplicationController {
+
     public function indexAction() {
-        if (session_status() === PHP_SESSION_NONE) {
+
+        if(session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        $userId = $_SESSION['user_id'] ?? null;
-        
-        $userModel = new User();
-        //$this->view->users = $userModel->getAll();
 
-        if ($userId) {
-            $userModel = new User();
-            $this->view->user = $userModel->getById($userId);
-        } else {
-            $this->view->user = null;
-        }
-    }
-    public function storeAction() {
-        if($_SERVER['REQUEST_METHOD']!=='POST') {
-            throw new Exception("Method not allowed");
-        }
-
-        $name=trim($_POST['user_name']??'');
-        $surname=trim($_POST['user_surname']??'');
-        $username=trim($_POST['user_username']??'');
-        $email=trim($_POST['user_email']??'');
-        $password=trim($_POST['user_password']??'');
-
-        if($name === '' || $surname === '' || $username === '' || $email === '' || $password === '') {
-            header('Location: ' . WEB_ROOT . '/users/register');
+        if(!isset($_SESSION['user_id'])) {
+            header("Location: ".WEB_ROOT."/users/login");
             exit;
         }
 
         $userModel = new User();
-        $userModel -> insertUser($name, $surname, $username, $email, $password);
-
-        header('Location: ' . WEB_ROOT . '/users');
-        exit;
-    }
-    public function editAction() {
-        $id = $this->_getParam('id');
-
-        if(!$id) {
-            throw new Exception("ID not provided");
-        }
-
-        $userModel = new User();
-        $user = $userModel->getById($id);
+        $user = $userModel->getById($_SESSION['user_id']);
 
         if(!$user) {
-            throw new Exception("User not found");
+            header("Location: ".WEB_ROOT."/users/logaout");
+            exit;
         }
 
         $this->view->user = $user;
-    }
-    public function updateAction() {
-        $id = $this->_getParam('id');
-
-        if($_SERVER['REQUEST_METHOD']!=='POST') {
-            throw new Exception("Method not allowed");
-        }
-
-        $name=trim($_POST['user_name']??'');
-        $surname=trim($_POST['user_surname']??'');
-        $username=trim($_POST['user_username']??'');
-        $email=trim($_POST['user_email']??'');
-        $password=trim($_POST['user_password']??'');
-
-        if($name === '') {
-            header("Location: " . WEB_ROOT . "/users/edit/$id");
-            exit;
-        }
-
-        $model = new User();
-        $model->updateUser($id, $name, $surname, $username, $email, $password);
-
-        header("Location: " . WEB_ROOT . "/users");
-        exit;
-    }
-    public function deleteAction() {
-        $id = $this->_getParam('id');
-
-        if(!$id) {
-            throw new Exception("ID not provided");
-        }
-
-        $model = new User();
-        $model->deleteUser($id);
-
-        header("Location: " . WEB_ROOT . "/users");
-        exit;
+        $this->view->setLayout('layout');
     }
 
     public function loginAction() {
-        if (session_status() === PHP_SESSION_NONE) {
-            @session_start();
+
+        if(session_status()===PHP_SESSION_NONE) {
+            session_start();
         }
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if(isset($_SESSION['user_id'])) {
+            header("Location: ".WEB_ROOT."/users");
+            exit;
+        }
+
+        if($_SERVER['REQUEST_METHOD']==='POST') {
 
             $username = trim($_POST['user_username'] ?? '');
             $password = trim($_POST['user_password'] ?? '');
 
             if($username === '' || $password === '') {
-                $this->view->error = "You must fill in all fields.";
+                $this->view->error = "All fields are required.";
                 return;
             }
 
             $model = new User();
             $user = $model->getByUsername($username);
 
-            if (!$user) {
-                $this->view->error = "User doesn't exist.";
-                return;
-            }
-            if (!password_verify($password, $user->user_password)) {
-                $this->view->error = "Incorrect password.";
+            if(!$user) {
+                $this->view->error = "User does not exist.";
                 return;
             }
 
-            //session_start();
+            if(!password_verify($password, $user->user_password)) {
+                $this->view->error = "Invalid password.";
+                return;
+            }
+
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_username'] = $user->user_username;
 
-            header("Location: " . WEB_ROOT . "/users/index");
+            header("Location: ".WEB_ROOT."/users");
             exit;
         }
+        
+        $this->view->setLayout('layout');
     }
-    
+
     public function registerAction() {
-        if (session_status() === PHP_SESSION_NONE) {
-            @session_start();
+        
+        if(session_status()===PHP_SESSION_NONE) {
+            session_start();
         }
-        if($_SERVER['REQUEST_METHOD'] !== 'POST') return;
+
+        if(isset($_SESSION['user_id'])) {
+            header("Location: ".WEB_ROOT."/users");
+            exit;
+        }
+
+        if($_SERVER['REQUEST_METHOD'] !=='POST') {
+            $this->view->setLayout('layout');
+            return;
+        }
 
         $name = trim($_POST['user_name'] ?? '');
         $surname = trim($_POST['user_surname'] ?? '');
@@ -140,9 +90,9 @@ class UsersController extends ApplicationController {
         $email = trim($_POST['user_email'] ?? '');
         $password = trim($_POST['user_password'] ?? '');
 
-        if ($name === '' || $surname === '' || $username === '' || $email === '' || $password === '') {
-            header("Location: " . WEB_ROOT . "/users/register");
-            exit;
+        if($name === ''|| $surname === ''|| $username === ''|| $email === ''|| $password === '') {
+            $this->view->errors = ["All fields are required."];
+            return;
         }
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
@@ -151,42 +101,27 @@ class UsersController extends ApplicationController {
         $userId = $model->insertUser($name, $surname, $username, $email, $passwordHash);
 
         if(!$userId) {
-            header("Location: " . WEB_ROOT . "/users/register");
-            exit;
+            $this->view->errors = ["Unable to register user."];
+            return;
         }
 
         $_SESSION['user_id'] = $userId;
         $_SESSION['user_username'] = $username;
 
-        header("Location: " . WEB_ROOT . "/users/index");
+        header("Location: ".WEB_ROOT."/users");
         exit;
     }
 
-    /*public function profileAction() {
-        $this->view->setLayout('layout'); //'main'
-
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        $userId = $_SESSION['user_id'] ?? null;
-        $userModel = new User();
-        
-        if($userId) {
-            $this->view->user = $userModel->getById($userId);
-        } else {
-            $this->view->user = null;
-        }
-    }*/
-
     public function logoutAction() {
-        if (session_status() === PHP_SESSION_NONE) {
+
+        if(session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        $_SESSION = [];
+        session_unset();
         session_destroy();
 
-        header("Location: " . WEB_ROOT . "/users/login");
+        header("Location: ".WEB_ROOT."/users/login");
         exit;
     }
 }
