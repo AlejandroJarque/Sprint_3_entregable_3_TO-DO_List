@@ -1,6 +1,7 @@
 <?php
 class User {
     private $file;
+    private $categories = [];
 
     public function __construct() {
         $this->file = dirname(__DIR__) . '/data/users.json';

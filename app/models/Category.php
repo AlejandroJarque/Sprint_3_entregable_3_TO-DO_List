@@ -3,6 +3,7 @@
 class Category {
 
     private $file;
+    private $tasks = [];
 
     public function __construct()
     {
