@@ -24,6 +24,8 @@ class TasksController extends ApplicationController {
     public function createAction() {
 
         $this->requireLogin();
+        $categoryModel = new Category();
+        $this->view->categories = $categoryModel->getAll();
         $this->view->setLayout('layout');
     }
 
@@ -119,6 +121,8 @@ class TasksController extends ApplicationController {
             throw new Exception("Task not found");
         }
 
+        $categoryModel = new Category();
+        $this->view->categories = $categoryModel->getAll();
         $this->view->task = $task;
         $this->view->setLayout('layout');
     }
