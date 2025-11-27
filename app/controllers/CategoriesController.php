@@ -2,8 +2,21 @@
 
 class CategoriesController extends ApplicationController {
 
+    private function requireLogin() {
+
+        if(session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if(!isset($_SESSION['user_id'])) {
+            header("Location: ".WEB_ROOT."/users/login");
+            exit;
+        }
+    }
+
     public function indexAction() {
 
+        $this->requireLogin();
         $this->view->setLayout('layout');
         $categoryModel = new Category();
         $this->view->categories = $categoryModel->getAll();
@@ -11,9 +24,13 @@ class CategoriesController extends ApplicationController {
 
     public function createAction() {
 
+        $this->requireLogin();
+        $this->view->setLayout('layout');
     }
 
     public function storeAction() {
+
+        $this->requireLogin();
 
         if($_SERVER['REQUEST_METHOD'] !== 'POST') {
             throw new Exception("Method not allowed");
@@ -37,6 +54,8 @@ class CategoriesController extends ApplicationController {
 
     public function editAction() {
 
+        $this->requireLogin();
+
         $id = $this -> _getParam('id');
 
         if(!$id) {
@@ -52,9 +71,12 @@ class CategoriesController extends ApplicationController {
         }
 
         $this -> view -> category = $category;
+        $this -> view -> setLayout('layout');
     }
 
     public function updateAction() {
+
+        $this->requireLogin();
 
         $id = $this->_getParam('id');
 
@@ -80,6 +102,8 @@ class CategoriesController extends ApplicationController {
 
     public function deleteAction() {
 
+        $this->requireLogin();
+        
         $id = $this->_getParam('id');
 
         if(!$id) {

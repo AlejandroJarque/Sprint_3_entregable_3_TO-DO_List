@@ -1,7 +1,7 @@
 <?php
 class TasksController extends ApplicationController {
 
-    public function requireLogin() {
+    private function requireLogin() {
 
         if(session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -88,7 +88,7 @@ class TasksController extends ApplicationController {
     public function deleteAction() {
 
         $this->requireLogin();
-        
+
         $id = $this->_getParam('id');
 
         if (!$id) {
