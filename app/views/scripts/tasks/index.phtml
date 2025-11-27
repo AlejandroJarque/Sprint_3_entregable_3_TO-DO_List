@@ -31,8 +31,8 @@
                     <td class="p-3"><?= htmlspecialchars($tas->status) ?></td>
                     <td class="p-3"><?= htmlspecialchars($tas->start_time) ?></td>
                     <td class="p-3"><?= htmlspecialchars($tas->end_time) ?></td>
-                    <td class="p-3"><?= htmlspecialchars($tas->user) ?></td>
-                    <td class="p-3"><?= is_array($tas->categories) ? implode(', ', $tas->categories) : '' ?> </td>  
+                    <td class="p-3"><?= htmlspecialchars($tas->user_name) ?></td>
+                    <td class="p-3"><?= is_array($tas->category_names) ? implode(', ', $tas->category_names) : '' ?> </td>  
                     <td class="p-3 text-center space-x-2">  
 
                             <a href="<?= WEB_ROOT ?>/tasks/edit/<?= $tas->id ?>"
