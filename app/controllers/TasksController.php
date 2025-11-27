@@ -17,8 +17,31 @@ class TasksController extends ApplicationController {
 
         $this->requireLogin();
         $this->view->setLayout('layout');
+
         $tasksModel = new Task();
-        $this->view->tasks = $tasksModel->getAll();
+        $userModel = new User();
+        $categoryModel = new Category();
+
+        $tasks= $tasksModel->getAll();
+
+        foreach($tasks as &$t) {
+            $user = $userModel->getById($t->user);
+            $t->user_name = $user ? $user->user_username : "Unknown";
+
+            $names = [];
+            if(!empty($t->categories) && is_array($t->categories)) {
+                foreach($t->categories as $catId) {
+                    $cat = $categoryModel->getById($catId);
+                    if($cat) {
+                        $names[] = $cat->category_name;
+                    }
+                }
+            }
+
+            $t->category_names = $names;
+        }
+
+        $this->view->tasks = $tasks;
     }
 
     public function createAction() {

@@ -1,14 +1,1 @@
-[
-    {
-        "id": 1,
-        "task_name": "Hacer los deberes",
-        "task_description": "Debo hacer los deberes",
-        "status": "pendiente",
-        "start_time": "2025-11-27T14:40",
-        "end_time": "2025-11-29T14:40",
-        "categories": [],
-        "user": "",
-        "create_at": "2025-11-26 14:40:24",
-        "updated_at": "2025-11-26 14:40:24"
-    }
-]
+[]
