@@ -4,7 +4,6 @@ $routes = array(
 	'/test' => 'test#index'
 );
 
-
 $routes['/'] = 'Home#index';
 $routes['/home'] = 'Home#index';
 $routes['/home/index'] = 'Home#index';
@@ -31,5 +30,6 @@ $routes['/users/update'] = 'users#update';
 $routes['/users/delete'] = 'users#delete';
 $routes['/users/create'] = 'users#create';
 $routes['/users'] = 'users#index';
+$routes['/users/profile'] = 'users#profile';
 $routes['/users/index'] = 'users#index';
 $routes['/users/logout'] = 'users#logout';

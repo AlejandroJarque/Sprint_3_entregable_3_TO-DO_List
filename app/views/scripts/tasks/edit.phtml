@@ -1,19 +1,20 @@
+
 <h2 class="text-3xl font-bold text-brandBrown mb-6">Editar tarea</h2>
 
 <div class="bg-white shadow rounded-xl p-8">
 
-    <form action="<?= WEB_ROOT ?>/tasks/update/<?= $task->id ?>" method="POST" class="space-y-5">
+    <form action="<?= WEB_ROOT ?>/tasks/update/<?= $this->task->id ?>" method="POST" class="space-y-5">
 
         <div>
             <label class="block text-brandBrown font-medium">Título</label>
-            <input type="text" name="task_name" value="<?= $task->task_name ?>"
+            <input type="text" name="task_name" value="<?= $this->task->task_name ?>"
                    class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
         </div>
 
         <div>
             <label class="block text-brandBrown font-medium">Descripción</label>
             <textarea name="task_description"
-                      class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28"><?= $task->task_description ?></textarea>
+                      class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28"><?= $this->task->task_description ?></textarea>
         </div>
 
         <div>
@@ -21,9 +22,9 @@
             <select name="status"
                     class="w-full border border-brandBrown/40 rounded px-3 py-2">
 
-                <option value="pendiente"<?= $task->status == 'pendiente' ? 'selected' : '' ?>>Pendiente</option>
-                <option value="en_curso"<?= $task->status == 'en_curso' ? 'selected' : '' ?>>En curso</option>
-                <option value="terminada"<?= $task->status == 'terminada' ? 'selected' : '' ?>>Terminada</option>
+                <option value="pendiente"<?= $this->task->status == 'pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                <option value="en_curso"<?= $this->task->status == 'en_curso' ? 'selected' : '' ?>>En curso</option>
+                <option value="terminada"<?= $this->task->status == 'terminada' ? 'selected' : '' ?>>Terminada</option>
 
             </select>
         </div>
@@ -33,7 +34,7 @@
                 <label class="block text-brandBrown font-medium">Inicio</label>
                 <input type="datetime-local"
                        name="start_time"
-                       value="<?= $task->start_time ?>"
+                       value="<?= $this->task->start_time ?>"
                        class="w-full border border-brandBrown/40 rounded px-3 py-2">
             </div>
 
@@ -41,23 +42,19 @@
                 <label class="block text-brandBrown font-medium">Fin</label>
                 <input type="datetime-local"
                        name="end_time"
-                       value="<?= $task->end_time ?>"
+                       value="<?= $this->task->end_time ?>"
                        class="w-full border border-brandBrown/40 rounded px-3 py-2">
             </div>
         </div>
 
         <div>
             <label class="block text-brandBrown font-medium">Categorías</label>
-            <select name="categories[]" multiple
+            <select name="categories"
                     class="w-full border border-brandBrown/40 rounded px-3 py-2 h-24">
-
-                <?php foreach ($categories as $cat): ?>
-                    <option value="<?= $cat['id'] ?>"
-                        <?= in_array($cat['id'], $task->categories ?? []) ? 'selected' : '' ?>>
-                        <?= $cat['name'] ?>
-                    </option>
-                <?php endforeach; ?>
-
+                        <option value="personal">Personal</option>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="estudio">Estudios</option>
+                        <option value="urgente">Urgente</option>
             </select>
         </div>
 

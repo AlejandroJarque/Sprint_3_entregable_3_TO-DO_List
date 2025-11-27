@@ -1,12 +1,20 @@
 <?php
 class UsersController extends ApplicationController {
     public function indexAction() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $userId = $_SESSION['user_id'] ?? null;
+        
         $userModel = new User();
-        $this->view->users = $userModel->getAll();
+        //$this->view->users = $userModel->getAll();
 
-    }
-    public function createAction() {
-
+        if ($userId) {
+            $userModel = new User();
+            $this->view->user = $userModel->getById($userId);
+        } else {
+            $this->view->user = null;
+        }
     }
     public function storeAction() {
         if($_SERVER['REQUEST_METHOD']!=='POST') {
@@ -85,6 +93,10 @@ class UsersController extends ApplicationController {
     }
 
     public function loginAction() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $username = trim($_POST['user_username'] ?? '');
@@ -107,19 +119,19 @@ class UsersController extends ApplicationController {
                 return;
             }
 
-            session_start();
+            //session_start();
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_username'] = $user->user_username;
 
-            header("Location: " . WEB_ROOT . "/users/profile");
+            header("Location: " . WEB_ROOT . "/users/index");
             exit;
         }
     }
     
     public function registerAction() {
-        if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            return;
-        }
+        if($_SERVER['REQUEST_METHOD'] !== 'POST') return;
+
+        session_start();
 
         $name = trim($_POST['user_name'] ?? '');
         $surname = trim($_POST['user_surname'] ?? '');
@@ -137,8 +149,9 @@ class UsersController extends ApplicationController {
         $model = new User();
         $userId = $model->insertUser($name, $surname, $username, $email, $passwordHash);
 
-        if (session_start() === PHP_SESSION_NONE) {
-            session_start();
+        if(!$userId) {
+            header("Location: " . WEB_ROOT . "/users/register");
+            exit;
         }
 
         $_SESSION['user_id'] = $userId;
@@ -148,15 +161,26 @@ class UsersController extends ApplicationController {
         exit;
     }
 
-    public function profileAction() {
+    /*public function profileAction() {
         $this->view->setLayout('layout'); //'main'
 
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $userId = $_SESSION['user_id'] ?? null;
         $userModel = new User();
-        $this->view->users = $userModel->getAll();
-    }
+        
+        if($userId) {
+            $this->view->user = $userModel->getById($userId);
+        } else {
+            $this->view->user = null;
+        }
+    }*/
 
     public function logoutAction() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         $_SESSION = [];
         session_destroy();
