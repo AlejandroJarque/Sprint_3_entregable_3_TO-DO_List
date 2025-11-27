@@ -1,48 +1,48 @@
-<h2 class="text-3xl font-bold text-brandBrown mb-6">Crear nueva tarea</h2>
+<h2 class="text-3xl font-bold text-brandBrown mb-6">Create new task</h2>
 
 <div class="bg-white shadow rounded-xl p-8">
 
   <form action="<?= WEB_ROOT ?>/tasks/store" method="POST" class="space-y-5">
 
         <div>
-            <label class="block text-brandBrown font-medium">Título</label>
+            <label class="block text-brandBrown font-medium">Title</label>
             <input type="text" name="task_name"
                    class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40"
                    required>
         </div>
 
         <div>
-            <label class="block text-brandBrown font-medium">Descripción</label>
+            <label class="block text-brandBrown font-medium">Description</label>
             <textarea name="task_description"
                    class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28 focus:ring-brandBrown/40"></textarea>
         </div>
 
         <div>
-            <label class="block text-brandBrown font-medium">Estado</label>
+            <label class="block text-brandBrown font-medium">Status</label>
             <select name="status"
                     class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
-                <option value="pendiente">Pendiente</option>
-                <option value="en_curso">En curso</option>
-                <option value="terminada">Terminada</option>
+                <option value="pendiente">Pending</option>
+                <option value="en_curso">On going</option>
+                <option value="terminada">Finished</option>
             </select>
         </div>
 
         <div class="grid md:grid-cols-2 gap-4">
             <div>
-                <label class="block text-brandBrown font-medium">Inicio</label>
+                <label class="block text-brandBrown font-medium">Start date</label>
                 <input type="datetime-local" name="start_time"
                        class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
             </div>
 
             <div>
-                <label class="block text-brandBrown font-medium">Fin</label>
+                <label class="block text-brandBrown font-medium">End date</label>
                 <input type="datetime-local" name="end_time"
                        class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
             </div>
         </div>
 
         <div>
-            <label class="block text-brandBrown font-medium">Categorías</label>
+            <label class="block text-brandBrown font-medium">Categories</label>
             <select name="categories[]" multiple
                     class="w-full border border-brandBrown/40 rounded px-3 py-2 h-24 focus:ring-brandBrown/40">
                 <?php foreach ($categories as $cat): ?>
@@ -53,13 +53,13 @@
 
        <button type="submit"
         class="w-full bg-brandBrown text-white py-3 rounded-lg shadow hover:bg-brandBrown/90 transition">
-              Guardar tarea
+              Save task
         </button>
 
     </form>
 
     <p class="text-center mt-4">
-        <a href="<?= WEB_ROOT?>/tasks/index" class="text-brandBrown font-semibold underline">Volver</a>
+        <a href="<?= WEB_ROOT?>/tasks/index" class="text-brandBrown font-semibold underline">Back</a>
     </p>
 
 </div>

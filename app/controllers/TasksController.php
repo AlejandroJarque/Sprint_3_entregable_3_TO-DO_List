@@ -15,7 +15,7 @@ class TasksController extends ApplicationController {
     public function storeAction() {
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            throw new Exception('Metodo no permitido');
+            throw new Exception('Method not allowed');
         }
 
         $name = trim($_POST['task_name'] ?? '');
@@ -42,7 +42,7 @@ class TasksController extends ApplicationController {
         $id = $this->_getParam('id');
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            throw new Exception('Metodo no permitido');
+            throw new Exception('Method not allowed');
         }
 
         $name = trim($_POST['task_name'] ?? '');
@@ -71,7 +71,7 @@ class TasksController extends ApplicationController {
         $id = $this->_getParam('id');
 
         if (!$id) {
-            throw new Exception("ID no proporcionado");
+            throw new Exception("ID not provided");
         }
 
         $model = new Task();
@@ -86,14 +86,14 @@ class TasksController extends ApplicationController {
         $id = $this->_getParam('id');
 
         if (!$id) {
-            throw new Exception("ID no proporcionado");
+            throw new Exception("ID not provided");
         }
 
         $model = new Task();
         $task = $model->getById($id);
 
         if (!$task) {
-            throw new Exception("Tarea no encontrada");
+            throw new Exception("Task not found");
         }
 
         $this->view->task = $task;
