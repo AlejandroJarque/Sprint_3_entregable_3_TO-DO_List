@@ -119,11 +119,11 @@ class UsersController extends ApplicationController {
                 return;
             }
 
-            session_start();
+            //session_start();
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_username'] = $user->user_username;
 
-            header("Location: " . WEB_ROOT . "/users/profile");
+            header("Location: " . WEB_ROOT . "/users/index");
             exit;
         }
     }
@@ -131,9 +131,7 @@ class UsersController extends ApplicationController {
     public function registerAction() {
         if($_SERVER['REQUEST_METHOD'] !== 'POST') return;
 
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        session_start();
 
         $name = trim($_POST['user_name'] ?? '');
         $surname = trim($_POST['user_surname'] ?? '');
@@ -159,11 +157,11 @@ class UsersController extends ApplicationController {
         $_SESSION['user_id'] = $userId;
         $_SESSION['user_username'] = $username;
 
-        header("Location: " . WEB_ROOT . "/users/profile");
+        header("Location: " . WEB_ROOT . "/users/index");
         exit;
     }
 
-    public function profileAction() {
+    /*public function profileAction() {
         $this->view->setLayout('layout'); //'main'
 
         if (session_status() === PHP_SESSION_NONE) {
@@ -177,7 +175,7 @@ class UsersController extends ApplicationController {
         } else {
             $this->view->user = null;
         }
-    }
+    }*/
 
     public function logoutAction() {
         if (session_status() === PHP_SESSION_NONE) {
