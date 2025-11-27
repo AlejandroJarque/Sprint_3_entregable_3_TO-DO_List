@@ -12,9 +12,22 @@
             </h1>
         </div>
 
+        <?php
+            if(session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            $isLogged = isset($_SESSION['user_id']);
+        ?>
+
         <nav class="space-x-6 text-lg font-medium">
-            <a href="<?= WEB_ROOT ?>/" 
-               class="text-brandBrown hover:underline">Index</a>
+
+            <?php if(!$isLogged):?>
+
+                <a href="<?= WEB_ROOT ?>/users/login" class="text-brandBrown hover:underline">Login</a>
+                <a href="<?= WEB_ROOT ?>/users/register" class="text-brandBrown hover:underline">Register</a>
+
+            <?php else: ?>
 
             <a href="<?= WEB_ROOT ?>/tasks" 
                class="text-brandBrown hover:underline">Tasks</a>
@@ -23,8 +36,13 @@
                class="text-brandBrown hover:underline">Categories</a>
 
             <a href="<?= WEB_ROOT ?>/users" 
-               class="text-brandBrown hover:underline">Users</a>
+               class="text-brandBrown hover:underline">Profile</a>
+
+            <a href="<?= WEB_ROOT ?>/users/logout" 
+               class="text-brandBrown hover:underline">Logout</a>
+
+            <?php endif; ?>
+
         </nav>
     </div>
-
 </header>
