@@ -7,38 +7,41 @@
 
         <div>
             <label class="block text-brandBrown font-medium">Title</label>
-            <input type="text" name="task_name" 
-                   class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
+            <input type="text" name="task_name"
+                    value="<?= htmlspecialchars($this->task->task_name) ?>"
+                    class="w-full border border-brandBrown/40 rounded px-3 py-2 focus:ring-brandBrown/40">
         </div>
 
         <div>
             <label class="block text-brandBrown font-medium">Description</label>
             <textarea name="task_description"
-                      class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28"></textarea>
+                      class="w-full border border-brandBrown/40 rounded px-3 py-2 h-28">
+                      <?= htmlspecialchars($this->task->task_description) ?>
+            </textarea>
         </div>
 
         <div>
             <label class="block text-brandBrown font-medium">Status</label>
             <select name="status"
                     class="w-full border border-brandBrown/40 rounded px-3 py-2">
-                <option value="pendiente">Pending</option>
-                <option value="en_curso">In pogress</option>
-                <option value="terminada">Finished</option>
+                <option value="pendiente"<?= $this->task->status === 'pendiente' ? 'selected' : '' ?>>Pending</option>
+                <option value="en_curso"<?= $this->task->status === 'en_curso' ? 'selected' : '' ?>>In pogress</option>
+                <option value="terminada"<?= $this->task->status === 'terminada' ? 'selected' : '' ?>>Finished</option>
             </select>
         </div>
 
         <div class="grid md:grid-cols-2 gap-4">
             <div>
                 <label class="block text-brandBrown font-medium">Index</label>
-                <input type="datetime-local"
-                       name="start_time"
+                <input type="datetime-local" name="start_time"
+                        value="<?= $this->task->start_time ?>"
                        class="w-full border border-brandBrown/40 rounded px-3 py-2">
             </div>
 
             <div>
                 <label class="block text-brandBrown font-medium">Fin</label>
-                <input type="datetime-local"
-                       name="end_time"
+                <input type="datetime-local"name="end_time"
+                        value="<?= $this->task->end_time ?>"
                        class="w-full border border-brandBrown/40 rounded px-3 py-2">
             </div>
         </div>
@@ -57,7 +60,7 @@
 
         <button type="submit"
                 class="w-full bg-brandBrown text-white py-3 rounded-lg shadow hover:bg-brandBrown/90 transition">
-            Save task
+            Update task
         </button>
 
     </form>
