@@ -27,22 +27,27 @@
                     <td class="p-3"><?= is_array($tas->category_names) ? implode(', ', $tas->category_names) : '' ?> </td>  
                     <td class="p-3 text-center space-x-2">  
 
-                            <a href="<?= WEB_ROOT ?>/tasks/show/<?= $task['id'] ?>"
-                             class="text-blue-600 font-semibold hover:underline">Ver</a>
-"
-
-                            <a href="<?= WEB_ROOT ?>/tasks/edit/<?= $tas->id ?>"
-                               class="text-green-600 font-semibold hover:underline">
-                               ✏️ Editar
-                            </a>
+                        <a href="<?= WEB_ROOT ?>/tasks/show/<?= $tas->id ?>"
+                            class="text-blue-600 font-semibold hover:underline">🔍Ver</a>
 
 
-                            <button type="submit"
-                               class="text-red-600 font-semibold hover:underline">
-                                🗑️ Borrar
-                            </button>
+                        <a href="<?= WEB_ROOT ?>/tasks/edit/<?= $tas->id ?>"
+                            class="text-green-600 font-semibold hover:underline">
+                            ✏️Editar
+                        </a>
 
-                    
+
+                        <form action="<?= WEB_ROOT ?>/tasks/delete/<?= $tas->id ?>" 
+                            method="POST" 
+                            class="inline"
+                            onsubmit="return confirm('Are you sure you want to delete this task?');">
+
+                                <button type="submit"
+                                        class="text-red-600 font-semibold hover:underline">
+                                    🗑️ Delete
+                                </button>
+
+                        </form>
                 </tr>
                 
             <?php endforeach; ?>

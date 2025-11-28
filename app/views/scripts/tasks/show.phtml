@@ -1,16 +1,42 @@
-<h2 class="text-3xl font-bold text-brandBrown mb-6">Detalle de tarea</h2>
+<h2 class="text-3xl font-bold text-brandBrown mb-6">Show Task</h2>
 <div clas="bg-white shawdow rounded-xl p-8 space-y-4">
 
-<p><strong class="text-brandBrown">Título:</strong><?= $task['title'] ?></p>
-<p><strong class="text-brandBrown">Descripción:</strong><?= $task['description'] ?></p>
-<p><strong class="text-brandBrown">Estado:</strong><?= $task['status'] ?></p>
-<p><strong class="text-brandBrown">Inicio:</strong><?= $task['start-time'] ?></p>
-<p><strong class="text-brandBrown">Fin:</strong><?= $task['end_time'] ?></p>
-<p><strong class="text-brandBrown">Categotías:</strong><?= implode(',', $task['categories']) ?></p>
+    <p>
+        <strong class="text-brandBrown">Title:</strong>
+        <?= htmlspecialchars($this->task->task_name) ?>
+    </p>
 
+    <p>
+        <strong class="text-brandBrown">Description:</strong>
+        <?= htmlspecialchars($this->task->task_description) ?>
+    </p>
 
+    <p>
+        <strong class="text-brandBrown">Status:</strong>
+        <?= htmlspecialchars($this->task->status) ?>
+    </p>
+
+    <p>
+        <strong class="text-brandBrown">Start date:</strong>
+        <?= htmlspecialchars($this->task->start_time) ?>
+    </p>
+
+    <p>
+        <strong class="text-brandBrown">End date:</strong>
+        <?= htmlspecialchars($this->task->end_time) ?>
+    </p>
+
+    <p>
+        <strong class="text-brandBrown">Categories:</strong>
+        <?= !empty($this->task->category_names) ? implode(', ', $this->task->category_names) : '—' ?>
+    </p>
+
+    <p>
+        <strong class="text-brandBrown">User:</strong>
+        <?= htmlspecialchars($this->task->user_name) ?>
+    </p><br>
 
 <a href="/tasks"
-class="bg-brandBrown text-white px-4 py-2 rounded hover:bg-brandBrown/90">Volver</a>
+class="bg-brandBrown text-white px-4 py-2 rounded hover:bg-brandBrown/90">Back</a>
 
 </div>

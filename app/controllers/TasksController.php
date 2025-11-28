@@ -25,7 +25,7 @@ class TasksController extends ApplicationController {
         $tasks= $tasksModel->getAll();
 
         foreach($tasks as &$t) {
-            $user = $userModel->getById($t->user);
+            $user = $userModel->getById($t->user_id);
             $t->user_name = $user ? $user->user_username : "Unknown";
 
             $names = [];
@@ -66,7 +66,7 @@ class TasksController extends ApplicationController {
         $start = ($_POST['start_time'] ?? '');
         $end = ($_POST['end_time'] ?? '');
         $categories = $_POST['categories'] ?? [];
-        $user = ($_POST['user'] ?? '');
+        $user = ($_SESSION['user_id'] ?? '');
 
         if ($name === '') {
             header("Location: " . WEB_ROOT . "/tasks/create");
@@ -96,7 +96,7 @@ class TasksController extends ApplicationController {
         $start = ($_POST['start_time'] ?? '');
         $end = ($_POST['end_time'] ?? '');
         $categories = $_POST['categories'] ?? [];
-        $user = ($_POST['user'] ?? '');
+        $user = ($_SESSION['user_id'] ?? '');
 
         if ($name === '') {
             header("Location: " . WEB_ROOT . "/tasks/edit/$id");
@@ -113,6 +113,10 @@ class TasksController extends ApplicationController {
     public function deleteAction() {
 
         $this->requireLogin();
+
+        if($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            throw new Exception("Method not allowed");
+        }
 
         $id = $this->_getParam('id');
 
@@ -148,6 +152,45 @@ class TasksController extends ApplicationController {
         $this->view->categories = $categoryModel->getAll();
         $this->view->task = $task;
         $this->view->setLayout('layout');
+    }
+
+    public function showAction() {
+
+        $this->requireLogin();
+        $id = $this->_getParam('id');
+
+        if(!$id) {
+            throw new Exception("ID not provided");
+        }
+
+        $model = new Task();
+        $task = $model->getById($id);
+
+        if(!$task) {
+            throw new Exception("Task not found");
+        }
+
+        $userModel = new User();
+        $categoryModel = new Category();
+
+        $user = $userModel->getById($task->user_id);
+        $task->user_name = $user ? $user->user_username : "Unknown";
+
+        $names = [];
+        if(is_array($task->categories)) {
+            foreach($task->categories as $c) {
+                $cat = $categoryModel->getById($c);
+                if($cat) {
+                    $names[] = $cat->category_name;
+                }
+            }
+        }
+
+        $task->category_names = $names;
+
+        $this->view->task = $task;
+        $this->view->setLayout('layout');
+
     }
 }
 ?>

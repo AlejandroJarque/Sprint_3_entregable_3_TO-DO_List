@@ -6,14 +6,15 @@ class UsersController extends ApplicationController {
 
         $userId = $_SESSION['user_id'] ?? null;
 
-        $userModel = new User();
-
         if(!$userId) {
-            $this->view->user = $userModel->getById($userId);
-        } else {
-            $this->view->user = null;
+            header("Location: " . WEB_ROOT . "/users/login");
+            exit;
         }
-    }
+
+        $userModel = new User();
+        $this->view->user = $userModel->getById($userId);
+
+        }
 
     public function loginAction() {
         $this->ensureSession();
