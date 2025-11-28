@@ -2,15 +2,9 @@
 class UsersController extends ApplicationController {
 
     public function indexAction() {
+        $this->ensureSession();
 
-        if(session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        if(!isset($_SESSION['user_id'])) {
-            header("Location: ".WEB_ROOT."/users/login");
-            exit;
-        }
+        $userId = $_SESSION['user_id'] ?? null;
 
         $userModel = new User();
         $user = $userModel->getById($_SESSION['user_id']);
