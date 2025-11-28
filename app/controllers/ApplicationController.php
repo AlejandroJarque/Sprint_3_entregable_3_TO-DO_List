@@ -6,5 +6,9 @@
  */
 class ApplicationController extends Controller 
 {
-	
+	public function ensureSession() {
+        if(session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+    }
 }
