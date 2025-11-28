@@ -4,7 +4,7 @@ class User {
     private $categories = [];
 
     public function __construct() {
-        $this->file = dirname(__DIR__) . '/data/users.json';
+        $this->file = __DIR__ . '/../data/users.json';
 
         if (!file_exists($this->file)) {
             file_put_contents($this->file, "[]");
@@ -37,7 +37,7 @@ class User {
         $users = $this->load();
 
         foreach($users as $user){
-            if($user['id']===$id){
+            if($user['id'] == $id){
                 return(object)$user;
             }
         }

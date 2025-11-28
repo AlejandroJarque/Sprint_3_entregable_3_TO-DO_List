@@ -6,7 +6,9 @@
         Login Form
     </h2>
 
-    <?php if(!empty($error)):?>
+    <?php
+    $user = $this->user;
+    if(!empty($error)):?>
         <p class="text-red-600 text-center mb-4"><?= $error ?></p>
     <?php endif; ?>
 
