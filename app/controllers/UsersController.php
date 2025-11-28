@@ -7,27 +7,16 @@ class UsersController extends ApplicationController {
         $userId = $_SESSION['user_id'] ?? null;
 
         $userModel = new User();
-        $user = $userModel->getById($_SESSION['user_id']);
 
-        if(!$user) {
-            header("Location: ".WEB_ROOT."/users/logaout");
-            exit;
+        if(!$userId) {
+            $this->view->user = $userModel->getById($userId);
+        } else {
+            $this->view->user = null;
         }
-
-        $this->view->user = $user;
-        $this->view->setLayout('layout');
     }
 
     public function loginAction() {
-
-        if(session_status()===PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        if(isset($_SESSION['user_id'])) {
-            header("Location: ".WEB_ROOT."/users");
-            exit;
-        }
+        $this->ensureSession();
 
         if($_SERVER['REQUEST_METHOD']==='POST') {
 
@@ -55,28 +44,15 @@ class UsersController extends ApplicationController {
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_username'] = $user->user_username;
 
-            header("Location: ".WEB_ROOT."/users");
+            header("Location: ".WEB_ROOT. "/users/index");
             exit;
         }
-        
-        $this->view->setLayout('layout');
     }
 
     public function registerAction() {
-        
-        if(session_status()===PHP_SESSION_NONE) {
-            session_start();
-        }
+        $this->ensureSession();
 
-        if(isset($_SESSION['user_id'])) {
-            header("Location: ".WEB_ROOT."/users");
-            exit;
-        }
-
-        if($_SERVER['REQUEST_METHOD'] !=='POST') {
-            $this->view->setLayout('layout');
-            return;
-        }
+        if($_SERVER['REQUEST_METHOD'] !=='POST') return;
 
         $name = trim($_POST['user_name'] ?? '');
         $surname = trim($_POST['user_surname'] ?? '');
@@ -95,27 +71,24 @@ class UsersController extends ApplicationController {
         $userId = $model->insertUser($name, $surname, $username, $email, $passwordHash);
 
         if(!$userId) {
-            $this->view->errors = ["Unable to register user."];
-            return;
+            header("Location: " . WEB_ROOT . "/users/register");
+            exit;
         }
 
         $_SESSION['user_id'] = $userId;
         $_SESSION['user_username'] = $username;
 
-        header("Location: ".WEB_ROOT."/users");
+        header("Location: ".WEB_ROOT."/users/index");
         exit;
     }
 
     public function logoutAction() {
+        $this->ensureSession();
 
-        if(session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        session_unset();
+        $_SESSION = [];
         session_destroy();
 
-        header("Location: ".WEB_ROOT."/users/login");
+        header("Location: " .WEB_ROOT. "/users/login");
         exit;
     }
 }
