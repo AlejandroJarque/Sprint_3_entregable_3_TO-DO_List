@@ -1,3 +1,28 @@
+## Description:
+In this project, we've created a task app where users can register and create their own to-do lists, categorizing them by type. 
+First, the user registers to view their profile, and from there they can navigate the application.
+
+## Proyect:
+To create this application, we used the MVC architectural pattern, which is based on creating a model class connected to a controller class. 
+This controller, in turn, displays the different views through predefined routes. Both the model and the controller have different methods that handle each task the module needs to perform, 
+such as creating or deleting an object. The routes define the flow of views based on the actions we take. 
+For example, when entering the program for the first time, if it doesn't have any users stored in its JSON database, it will display the registration view. However, if we have already created our profile, it will take us directly to the login view without having to go through the registration view. Each module consists of a series of indexes, which serve as the starting point for each part of the application.
+
+## Views:
+For the design of the views, we used Tailwind, which helped us add styles directly to the phtml scripts, generating visually appealing views. 
+We also added emojis to provide a more visual guide to the functions.
+
+## Json files:
+To store all the information, we used separate JSON files for each module, so the information is automatically stored as the user fills in the fields. 
+We generated a JSON file for each module so the information wouldn't get mixed up and we could review the files more easily.
+
+## Technologies and Gadgets:
+ - MVC architectural pattern
+ - Tailwind
+ - Json files
+ - Visual Studio Code
+
+
 # PHP initial Project
 Main structure of php project. Folders / files:
 - **app**
