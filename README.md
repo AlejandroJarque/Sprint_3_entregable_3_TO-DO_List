@@ -24,7 +24,7 @@ We generated a JSON file for each module so the information wouldn't get mixed u
  - GitHub
  - Xampp
 
-## Facility
+## Facility:
  - Clone the repository: git clone https://github.com/IT-Academy-BCN/phpInitialDemo
  - Create a branch and define it as default from the main branch: git checkout -b develop main
  - Generate branches for each module starting from the develop branch: - git checkout -b feature/setup_generals develop (that one isn't necesary, but as we did i highlight it)
@@ -36,3 +36,54 @@ We generated a JSON file for each module so the information wouldn't get mixed u
                                                                         - git merge feature/tasks
                                                                         - git merge feature/categories
  - When every thing is done just make a pull request from develop branch to main branch from GitHub.
+
+## Proyect structure:
+*app/
+      - controllers/
+                   - UserController.php
+                   - TaskController.php
+                   - CategoryController.php
+      - models/
+              - User.php
+              - Task.php
+              - Category.php
+      - views/
+             - common/
+                     - footer.phtml
+                     - header.phtml
+            - layouts/
+                     - layout.phtml
+            - scripts/
+                  - categories/
+                              - create.phtml
+                              - edit.phtml
+                              - index.phtml
+                  - error/
+                  - home/
+                        - index.phtml
+                  - tasks/
+                         - create.phtml
+                         - edit.phtml
+                         - index.phtml
+                         - show.phtml
+                  - test/
+                  - users/
+                         - index.phtml
+                         - login.phtml
+                         - register.phtml
+      
+*config/
+      - db.inc.php/
+      - environment.inc.php/
+      - routes.php/
+      - settings.ini/
+*lib/
+      - base/
+*web/
+      - images/
+      - javascripts/
+      - stylesheets/
+      - .htaccess
+      - index.php
+ *README.md
+
